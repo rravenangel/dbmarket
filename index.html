@@ -6,913 +6,439 @@
   <title>Dragon Ball Ultimate Collection</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flipdown@0.3.2/dist/flipdown.min.css">
-  <style>
-    /* FONT FACES */
-    @font-face {
-      font-family: 'Saiyan Sans';
-      src: url('./images/SaiyanSansRegular.ttf') format('truetype');
-    }
-    @font-face {
-      font-family: 'Poppins';
-      src: url('./images/Poppins-SemiBold.ttf') format('truetype');
-      font-weight: 600;
-    }
-    @font-face {
-      font-family: 'Helvetica';
-      src: url('./images/HelveticaNeueHeavy.ttf') format('truetype');
-    }
-    @font-face {
-      font-family: 'NotoSansJP';
-      src: url('./images/NotoSansJP.ttf') format('truetype'); 
-      font-weight: normal;
-      font-style: normal;
-    }	
+<style>
+  /* FONT FACES */
+  @font-face {
+    font-family: 'Saiyan Sans';
+    src: url('./images/SaiyanSansRegular.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'Poppins';
+    src: url('./images/Poppins-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+  }
+  @font-face {
+    font-family: 'Helvetica';
+    src: url('./images/HelveticaNeueHeavy.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'NotoSansJP';
+    src: url('./images/NotoSansJP.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  .font-helvetica-custom {
+    font-family: Helvetica, Arial, sans-serif; /* Arial dan sans-serif sebagai fallback */
+  }
 
-    /* GLOBAL STYLES */
-    body {
-      background-color: #0f172a;
-      font-family: 'Helvetica', sans-serif;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    }
-    
-    .font-saiyan {
-      font-family: 'Saiyan Sans', sans-serif;
-      letter-spacing: 2px;
-    }
-    
-    .font-poppins-sb {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-    }
+  /* GLOBAL STYLES */
+  body {
+    background-color: #0f172a;
+    font-family: 'Helvetica', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  .font-saiyan {
+    font-family: 'Saiyan Sans', sans-serif;
+    letter-spacing: 2px;
+  }
+  .font-poppins-sb {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
 
-    /* MAIN CONTAINER */
-    .main-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      width: 100%;
-    }
+  /* MAIN CONTAINER */
+  .main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+  }
 
-    /* HERO SECTION */
+  /* HERO SECTION (Tinggi Dibuat Responsif) */
+  .hero-section {
+    /* Style dasar ini akan berlaku untuk mobile (di bawah 768px) */
+    height: 60vh;    /* Tinggi untuk mobile */
+    min-height: 400px; /* Min-height untuk mobile */
+    position: relative;
+    background: #000;
+    overflow: hidden;
+  }
+  /* Penyesuaian untuk Tablet (mulai dari lebar 768px) */
+  @media (min-width: 768px) { /* md breakpoint Tailwind */
     .hero-section {
-      height: 60vh;
-      min-height: 400px;
-      position: relative;
-      z-index: 30;
-      background: #000;
-      overflow: hidden;
+      height: 45vh;     /* Tinggi untuk tablet */
+      min-height: 350px; /* Min-height untuk tablet */
     }
-
-    .hero-section video {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.7;
+  }
+  /* Penyesuaian untuk Desktop (mulai dari lebar 1024px) */
+  @media (min-width: 1024px) { /* lg breakpoint Tailwind */
+    .hero-section {
+      height: 60vh;     /* Tinggi untuk desktop */
+      min-height: 400px; /* Min-height untuk desktop */
     }
+  }
 
+  .hero-section video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Opacity video diatur via kelas Tailwind di HTML (misal: opacity-60) */
+  }
+  .pixel-grid-overlay {
+    background-image:
+      linear-gradient(rgba(0,0,0,0.2) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.2) 1px, transparent 1px);
+    background-size: 8px 8px; /* Ukuran jaring default */
+    opacity: 0.4; /* Kejelasan jaring default */
+  }
   .teks-dragon {
-    /* Warna teks kuning solid */
     color: #FFD700;
     font-family: 'Saiyan Sans', sans-serif;
-    font-size: 4rem;
     font-weight: regular;
-    
-    /* Outline keluar dengan text-shadow */
-    text-shadow: 
-      0 0 15px #5D2906,
-      0 0 15px #5D2906,
-      0 0 15px #5D2906,
-      0 0 15px #5D2906,
-      0 0 15px #5D2906;
-    
-    /* Padding untuk ruang outline */
+    text-shadow:
+      0 0 15px #5D2906, 0 0 15px #5D2906, 0 0 15px #5D2906, 0 0 15px #5D2906, 0 0 15px #5D2906;
     padding: 0.2em;
     display: inline-block;
   }
-  
-    /* COMIC BACKGROUND */
-    .comic-bg {
-      background-image: url('./images/bg_comics_sp.jpg');
-      background-size: contain;
-      background-repeat: repeat;
-      background-position: center;
-      padding: 4rem 0;
+  .pemotong-mobile { /* Untuk H1 di Hero Section (S8+ fix) */
+    display: none;
+  }
+  @media (max-width: 365px) {
+    .pemotong-mobile {
+      display: inline; /* atau block jika diperlukan agar <br> berfungsi */
     }
+  }
 
-    /* HORIZONTAL SCROLL CARDS - CRUNCHYROLL STYLE */
-    .scroll-wrapper {
-      position: relative;
-      max-width: 1260px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
+  /* COMIC BACKGROUND (Padding dihapus dari sini, dikontrol via Tailwind di HTML section) */
+  .comic-bg {
+    background-image: url('./images/bg_comics_sp.jpg');
+    background-size: contain;
+    background-repeat: repeat;
+    background-position: center;
+  }
 
-    .cards-container {
-      display: flex;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      gap: 20px;
-      padding: 16px 0;
-      margin: 0;
-    }
-
-    .cards-container::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* UPDATED CARD STYLE WITH HOVER EFFECTS */
-    .card {
-      flex: 0 0 auto;
-      width: 260px;
-      position: relative;
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
-
-    .card-image {
-      width: 100%;
-      height: 347px;
-      background-size: cover;
-      background-position: center;
-      transition: all 0.3s ease;
-    }
-
-    .card-hover-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.85);
-      color: white;
-      padding: 20px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .card:hover .card-hover-content {
-      opacity: 1;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-    }
-
-    .card-title {
-      font-weight: 700;
-      font-size: 20px;
-      color: #FFD700;
-      margin-bottom: 8px;
-    }
-
-    .card-rating {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin-bottom: 8px;
-    }
-
-    .card-rating-stars {
-      color: #FFD700;
-      font-size: 16px;
-    }
-
-    .card-meta {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 12px;
-      font-size: 14px;
-      color: #ccc;
-    }
-
-    .card-description {
-      font-size: 14px;
-      line-height: 1.4;
-      margin-bottom: 10px;
-      display: -webkit-box;
-      -webkit-line-clamp: 4;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .card-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(0,0,0,0.7);
-      color: white;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    /* MARVEL-STYLE CIRCLE PORTRAITS */
-    .character-circle {
-      width: 180px;
-      height: 180px;
-      margin: 0 auto 30px;
-      border-radius: 50%;
-      background-size: cover;
-      background-position: center;
-      border: 8px solid white;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* FEATURE CARDS */
-    .feature-cards {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 25px;
-      margin: 40px 0;
-    }
-
-    .feature-card {
-      background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(30,30,30,0.9) 100%);
-      border-radius: 12px;
-      padding: 25px 15px;
-      text-align: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(255,215,0,0.1);
-    }
-
-    .feature-title {
-      font-family: 'Saiyan Sans', sans-serif;
-      color: #FFD700;
-      font-size: 22px;
-      margin-bottom: 15px;
-      letter-spacing: 1px;
-    }
-
-    .feature-desc {
-      color: white;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    /* NAV ARROWS */
-    .nav-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 40px;
-      height: 120px;
-      background-color: rgba(30, 30, 30, 0.9);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 10;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      transition: all 0.3s ease;
-    }
-
-    .nav-arrow:hover {
-      background-color: rgba(60, 60, 60, 0.9);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .arrow-left {
-      left: -20px;
-    }
-
-    .arrow-right {
-      right: -20px;
-    }
-
-    /* CTA BUTTON */
-    .cta-dragonball {
-      background: linear-gradient(to right, #FF0000, #FF8C00);
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-      transition: all 0.3s ease;
-      color: white;
-      font-size: 1.125rem;
-      padding: 0.75rem 2rem;
-      border-radius: 9999px;
-      font-weight: bold;
-      display: inline-block;
-    }
-
-    .cta-dragonball:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(255, 215, 0, 1);
-    }
-
-    /* PROMO TIMER (Old one, new is .promo-timer-section-wrapper) */
-    .promo-timer {
-      background: linear-gradient(135deg, #8B0000, #FF0000);
-      border: 2px solid #FFD700;
-      box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-      100% { transform: scale(1); }
-    }
-
-    /* RESPONSIVE ADJUSTMENTS */
-    @media (max-width: 768px) {
-      .feature-cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .character-circle {
-        width: 140px;
-        height: 140px;
-      }
-      .scroll-wrapper {
-        padding: 0 30px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .feature-cards {
-        grid-template-columns: 1fr;
-      }
-      .card {
-        width: 240px;
-      }
-      .card-image {
-        height: 320px;
-      }
-    }
-	
-  /* FLIPDOWN TIMER STYLES */
-  .promo-timer-section-wrapper {
+  /* HORIZONTAL SCROLL CARDS & NAV ARROWS (Versi Revisi Mobile First) */
+  .scroll-wrapper {
+    position: relative;
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 0 10px; /* Default padding untuk mobile terkecil */
+  }
+  .cards-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 30px 45px 30px; /* Bottom padding increased for labels */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    gap: 20px;
+    padding: 16px 0;
+    margin: 0;
+  }
+  .cards-container::-webkit-scrollbar { display: none; }
+
+  /* Base Card Style - Untuk Mobile Terkecil (<640px) */
+  .card {
+    flex: 0 0 auto; width: 135px; position: relative;
+    border-radius: 8px; overflow: hidden; transition: transform 0.3s ease;
+  }
+  .card-image {
+    width: 100%; height: 180px; background-size: cover;
+    background-position: center; transition: all 0.3s ease;
+  }
+  .card-hover-content {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.85); color: white; padding: 10px;
+    opacity: 0; transition: opacity 0.3s ease;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .card:hover .card-hover-content { opacity: 1; }
+  .card:hover { transform: scale(1.05); }
+  .card-title { font-weight: 700; font-size: 14px; color: #FFD700; margin-bottom: 4px; }
+  .card-rating { display: flex; align-items: center; gap: 3px; margin-bottom: 4px; }
+  .card-rating-stars { color: #FFD700; font-size: 12px; }
+  .card-rating span:last-child { font-size: 10px; }
+  .card-meta { display: flex; gap: 8px; margin-bottom: 6px; font-size: 10px; color: #ccc; }
+  .card-description {
+    font-size: 10px; line-height: 1.3; margin-bottom: 6px;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .card-badge {
+    position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,0.7);
+    color: white; padding: 2px 5px; border-radius: 4px; font-size: 9px; font-weight: 500;
+  }
+
+  /* NAV ARROWS - Base Style for Mobile (<768px) */
+  .nav-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 36px; height: 36px; background-color: rgba(0, 0, 0, 0.4);
+    color: white; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 10; border-radius: 50%; box-shadow: none;
+    transition: background-color 0.3s ease; font-size: 1.2rem; line-height: 1;
+  }
+  .nav-arrow:hover { background-color: rgba(0, 0, 0, 0.6); transform: translateY(-50%); }
+  .arrow-left { left: 5px; }
+  .arrow-right { right: 5px; }
+
+  /* RESPONSIVE ADJUSTMENTS FOR CARDS, SCROLL WRAPPER, NAV ARROWS (Mobile First) */
+  @media (min-width: 640px) { /* sm */
+    .scroll-wrapper { padding: 0 15px; }
+    .card { width: 160px; }
+    .card-image { height: 213px; }
+    .card-hover-content { padding: 12px; }
+    .card-title { font-size: 15px; }
+    .card-description { font-size: 11px; }
+    .card-meta, .card-rating span:last-child { font-size: 11px; }
+    .card-badge { font-size: 10px; top: 8px; right: 8px; padding: 2px 6px;}
+  }
+  @media (min-width: 768px) { /* md - Tablet Layout & Panah Desktop Style */
+    .scroll-wrapper { padding: 0 30px; }
+    .card { width: 180px; }
+    .card-image { height: 240px; }
+    .card-hover-content { padding: 15px; }
+    .card-title { font-size: 16px; }
+    .card-description { font-size: 12px; -webkit-line-clamp: 4; }
+    .card-meta, .card-rating span:last-child { font-size: 12px; }
+    .card-badge { font-size: 11px; }
+
+    .nav-arrow {
+      width: 40px; height: 120px; background-color: rgba(30, 30, 30, 0.9);
+      border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); font-size: 1.5rem;
+    }
+    .nav-arrow:hover {
+      background-color: rgba(60, 60, 60, 0.9); transform: translateY(-50%) scale(1.1);
+    }
+    .arrow-left { left: -20px; }
+    .arrow-right { right: -20px; }
+  }
+  @media (min-width: 1024px) { /* lg */
+    .scroll-wrapper { padding: 0 40px; }
+    .card { width: 220px; }
+    .card-image { height: 293px; }
+    .card-hover-content { padding: 18px; }
+    .card-title { font-size: 18px; }
+    .card-description { font-size: 13px; }
+    .card-meta, .card-rating span:last-child { font-size: 13px; }
+    .card-badge { font-size: 12px; top: 10px; right: 10px; padding: 3px 8px; }
+  }
+  @media (min-width: 1280px) { /* xl */
+    .card { width: 260px; }
+    .card-image { height: 347px; }
+    .card-hover-content { padding: 20px; }
+    .card-title { font-size: 20px; }
+    .card-description { font-size: 14px; }
+    .card-meta, .card-rating span:last-child { font-size: 14px; }
+  }
+
+  /* MARVEL-STYLE CIRCLE PORTRAITS & FEATURE CARDS (Mobile First) */
+  .character-circle { /* Base style untuk mobile (<768px) */
+    width: 80px; height: 80px; border-width: 4px; margin: 0 auto 15px;
+    border-radius: 50%; background-size: cover; background-position: center;
+    border-style: solid; border-color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative; overflow: hidden;
+  }
+  @media (min-width: 768px) { /* md - Tablet */
+    .character-circle { width: 140px; height: 140px; border-width: 8px; margin-bottom: 30px; }
+  }
+  @media (min-width: 1024px) { /* lg - Desktop */
+    .character-circle { width: 180px; height: 180px; }
+  }
+
+  .feature-cards { /* Mobile First: 2 kolom di mobile sebagai default */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 30px 0;
+  }
+  .feature-card { /* Base style untuk mobile */
+    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(30,30,30,0.9) 100%);
+    border-radius: 12px; padding: 15px 10px; text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease;
+  }
+  .feature-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(255,215,0,0.1); }
+  .feature-title { /* Base style untuk mobile */
+    font-family: 'Saiyan Sans', sans-serif; color: #FFD700;
+    font-size: 16px; margin-bottom: 8px; letter-spacing: 1px;
+  }
+  .feature-desc { /* Base style untuk mobile */
+    color: white; font-size: 12px; line-height: 1.4;
+  }
+  /* Penyesuaian Feature Cards untuk Tablet (md) */
+  @media (min-width: 768px) {
+    .feature-cards { gap: 20px; margin: 35px 0; }
+    .feature-card { padding: 20px 12px; }
+    .feature-title { font-size: 18px; margin-bottom: 10px; }
+    .feature-desc { font-size: 13px; }
+  }
+  /* Penyesuaian Feature Cards untuk Desktop (lg ke atas) - kembali ke 4 kolom */
+  @media (min-width: 1024px) {
+    .feature-cards { grid-template-columns: repeat(4, 1fr); gap: 25px; margin: 40px 0; }
+    .feature-card { padding: 25px 15px; }
+    .feature-title { font-size: 22px; margin-bottom: 15px; }
+    .feature-desc { font-size: 14px; line-height: 1.5; }
+  }
+
+  /* CSS untuk H2 "KUALITAS HD..." dengan <br> khusus mobile */
+  .mobile-break-h2 { display: none; }
+  @media (max-width: 639.98px) { .mobile-break-h2 { display: block; } }
+
+  /* Untuk <br> di dalam list item bonus game, aktif hanya di mobile (<md) */
+  .break-phone-list {
+    display: block; /* Defaultnya aktif (untuk mobile < 768px) */
+  }
+  @media (min-width: 768px) { /* md breakpoint Tailwind (tablet dan ke atas) */
+    .break-phone-list {
+      display: none; /* Sembunyikan <br> untuk tablet dan desktop */
+    }
+  }
+
+  /* FLIPDOWN TIMER STYLES (Tetap) */
+  .promo-timer-section-wrapper {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 20px 30px 45px 30px;
     background: linear-gradient(135deg, #8B0000, #FF0000);
-    border: 2px solid #FFD700;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
-    border-radius: 12px;
-    margin: 20px auto;
-    max-width: fit-content;
+    border: 2px solid #FFD700; box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+    border-radius: 12px; margin: 20px auto; max-width: fit-content;
     animation: pulse 2s infinite;
   }
-
   .promo-timer-text-line {
-    color: #fff;
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    font-weight: bold;
-    white-space: nowrap;
+    color: #fff; font-size: 1.25rem; margin-bottom: 1rem; font-weight: bold; white-space: nowrap;
   }
-
-  /* Main FlipDown container */
   .flipdown {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important; /* MODIFIKASI: Diubah dari flex-start ke center */
-    gap: 15px !important;
-    padding: 0 !important;
-    margin: 0 auto !important;
-    height: auto !important;
-    width: fit-content !important;
-    flex-wrap: nowrap !important;
+    display: flex !important; justify-content: center !important; align-items: center !important;
+    gap: 15px !important; padding: 0 !important; margin: 0 auto !important;
+    height: auto !important; width: fit-content !important; flex-wrap: nowrap !important;
   }
-
-  .flipdown-wrapper { /* Internal FlipDown wrapper */
-    display: flex !important;
-    justify-content: center !important;
-    align-items: flex-start !important; /* Usually flex-start for internal parts */
-    padding: 0 !important;
-    margin: 0 !important;
-    width: auto !important;
-    height: auto !important;
+  .flipdown-wrapper {
+    display: flex !important; justify-content: center !important; align-items: flex-start !important;
+    padding: 0 !important; margin: 0 !important; width: auto !important; height: auto !important;
     overflow: visible !important;
   }
-
-  .flipdown .rotor-group { /* Each number group (e.g., Hours) */
-    position: relative !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: flex !important;
-    flex-direction: row !important; /* Digits side-by-side */
-    align-items: center !important; /* Vertically center digits in their group */
-    flex-shrink: 0;
-    width: auto !important;
-    height: auto !important;
+  .flipdown .rotor-group {
+    position: relative !important; margin: 0 !important; padding: 0 !important;
+    display: flex !important; flex-direction: row !important; align-items: center !important;
+    flex-shrink: 0; width: auto !important; height: auto !important;
   }
-
-  .flipdown .rotor-group-heading { /* Default FlipDown labels */
-    display: none !important;
-  }
-
-  /* Custom labels (Hari, Jam, Menit, Detik) */
+  .flipdown .rotor-group-heading { display: none !important; }
   .flipdown .rotor-group:after {
-    content: attr(data-label) !important;
-    position: absolute !important;
-    bottom: -28px !important; /* Adjust if needed based on total height */
-    left: 50% !important;
-    transform: translateX(-50%) !important; /* Standard centering */
-    font-size: 13px !important;
-    color: #fff !important;
-    font-weight: bold !important;
-    line-height: 1 !important;
-    white-space: nowrap !important;
-    text-transform: uppercase;
-     /* Pastikan tidak ada style di sini yang membuat titik/lingkaran lagi */
-      background-color: transparent !important; /* Pastikan background transparan */
-      width: auto !important;                  /* Pastikan lebar auto */
-      height: auto !important;                 /* Pastikan tinggi auto */
-      border-radius: 0 !important;             /* Pastikan tidak ada border-radius */
-    }	
-
-  /* === OPSIONAL: Penyesuaian Centering untuk Label JAM & MENIT === */
-  /* Jika label JAM ( grup ke-2 setelah HARI yg hidden) masih kurang tengah: */
-  /* .flipdown .rotor-group:nth-child(2):after { */
-  /* transform: translateX(-52%) !important; /* Coba geser sedikit ke kiri, sesuaikan nilainya */ */
-  /* } */
-
-  /* Jika label MENIT ( grup ke-3 setelah HARI yg hidden) masih kurang tengah: */
-  /* .flipdown .rotor-group:nth-child(3):after { */
-  /* transform: translateX(-52%) !important; /* Coba geser sedikit ke kiri, sesuaikan nilainya */ */
-  /* } */
-
-
-  /* Colon separator (divider) */
-  .flipdown .rotor-group-divider {
-    display: none !important;
+    content: attr(data-label) !important; position: absolute !important; bottom: -28px !important;
+    left: 50% !important; transform: translateX(-50%) !important; font-size: 13px !important;
+    color: #fff !important; font-weight: bold !important; line-height: 1 !important;
+    white-space: nowrap !important; text-transform: uppercase; background-color: transparent !important;
+    width: auto !important; height: auto !important; border-radius: 0 !important;
+  }
+  .flipdown .rotor-group-divider { display: none !important; }
+  .flipdown .rotor {
+    vertical-align: middle !important; display: block !important; margin: 0 !important; padding: 0 !important;
+  }
+  .flipdown .rotor-top, .flipdown .rotor-bottom, .flipdown .rotor-leaf,
+  .flipdown .rotor-leaf-top, .flipdown .rotor-leaf-bottom {
+    display: block !important; width: 100% !important; box-sizing: border-box !important;
+  }
+  .flipdown .rotor-group:nth-child(1) { display: none !important; }
+  #flipdown .rotor-group:nth-child(n+5) { display: none !important; }
+  .flipdown.flipdown__theme-light .rotor-group:nth-child(n+2):nth-child(-n+3)::before,
+  .flipdown.flipdown__theme-light .rotor-group:nth-child(n+2):nth-child(-n+3)::after {
+    background-color: transparent !important;
+  }
+  .flipdown .rotor-group:nth-child(n+2):nth-child(-n+3)::after {
+    width: auto !important; height: auto !important; border-radius: 0 !important;
   }
 
-  .flipdown .rotor { /* Individual digit flipper */
-    vertical-align: middle !important;
-    display: block !important;
-    margin: 0 !important;
-    padding: 0 !important;
+  /* CTA BUTTON (Tetap) */
+  .cta-dragonball {
+    background: linear-gradient(to right, #FF0000, #FF8C00);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); transition: all 0.3s ease;
+    color: white; font-size: 1.125rem; padding: 0.75rem 2rem;
+    border-radius: 9999px; font-weight: bold; display: inline-block;
+  }
+  .cta-dragonball:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 215, 0, 1); }
+  .promo-timer {
+    background: linear-gradient(135deg, #8B0000, #FF0000);
+    border: 2px solid #FFD700; box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); }
   }
 
-  .flipdown .rotor-top,
-  .flipdown .rotor-bottom,
-  .flipdown .rotor-leaf,
-  .flipdown .rotor-leaf-top,
-  .flipdown .rotor-leaf-bottom {
-    display: block !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
+  /* STYLING TESTIMONI (Tetap) */
+  .testimonials-section { margin-top: 40px; padding-top: 30px; border-top: 1px solid #e5e7eb; }
+  .testimonials-title { font-family: 'Helvetica', sans-serif; font-size: 24px; color: #000; text-align: left; margin-bottom: 30px; }
+  .testimonial-manga-3frame{display:flex;align-items:flex-start;margin-bottom:30px;max-width:100%}
+  .testimonial-avatar-manga{width:100px;height:100px;border-radius:0;margin-top:23px;margin-right:-18px;flex-shrink:0;border:5px solid #000;object-fit:cover}
+  .testimonial-bubble-3frame{position:relative;flex-grow:1;display:flex;flex-direction:column;min-height:216px}
+  .bubble-frame-top{background-image:url(./images/frame_01.png);background-repeat:no-repeat;background-size:100% 100%;height:177px;width:100%;position:relative;display:flex;flex-direction:column;box-sizing:border-box;z-index:1}
+  .bubble-content-wrapper-top{padding:45px 25px 15px 55px;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;height:100%;box-sizing:border-box}
+  .testimonial-buyer-name{font-family:'NotoSansJP',sans-serif;font-size:20px;font-weight:700;color:#000;margin-bottom:8px;line-height:1.3;-webkit-text-stroke-width:.3px;margin-left:10px}
+  .testimonial-text-content{font-family:'NotoSansJP',sans-serif;font-size:16px;color:#333;line-height:1.5;margin-top:0;margin-left:10px;flex-grow:1;overflow-wrap:break-word;word-wrap:break-word}
+  .bubble-frame-middle{display:none!important;height:0!important;padding:0!important;margin:0!important;border:none!important}
+  .bubble-frame-bottom{background-image:url(./images/frame_03.png);background-repeat:no-repeat;background-size:100% 100%;height:39px;width:100%;z-index:1}
+  .testimonial-timestamp{font-family:'NotoSansJP',sans-serif;font-size:16px;color:#999;width:100%;text-align:left;margin-left:10px;margin-bottom:-20px}
+
+  /* VIEW MORE BUTTON (Tetap) */
+  .view-more-overlay-inside {
+    position: relative; width: 100vw; left: 50%; transform: translateX(-50%);
+    max-width: 1150px; height: 150px; background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 0px 0px 0 0; display: flex; justify-content: center;
+    align-items: center; margin: -120px 0 30px; padding: 10px 20px;
+    box-sizing: border-box; z-index: 10;
+  }
+  .view-more-button-nembus {
+    display: inline-block; background-color: #fff; border: 3px solid #000;
+    padding: 12px 24px; border-radius: 0px; font-family: 'NotoSansJP', sans-serif;
+    font-size: 16px; font-weight: bold; color: #222; margin-top: 80px;
+    text-decoration: none; transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  .view-more-button-nembus:hover, .view-more-button-nembus:active, .view-more-button-nembus:focus {
+    background-color: #000 !important; color: #fff !important;
+    border-color: #000 !important; outline: none;
   }
 
-  /* Hide Days group if not needed */
-  .flipdown .rotor-group:nth-child(1) {
-    display: none !important;
+  /* NEON BUTTONS (Tetap) */
+  .neon-db-button {
+    display: inline-flex; align-items: center; justify-content: flex-start;
+    padding-top: 14px; padding-bottom: 14px; padding-left: 16px; padding-right: 24px;
+    font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: bold;
+    color: #FFF; text-transform: uppercase; letter-spacing: 1px; text-decoration: none;
+    background-color: #0D1B3E; border: 2px solid #FFD700; border-radius: 50px;
+    box-shadow: 0 0 3px #FFD700,0 0 8px #FFD700,0 0 15px #FFEA00,0 0 25px #FFAB00,inset 0 0 3px rgba(255,220,77,.5);
+    transition: all .3s cubic-bezier(.25,.8,.25,1); position: relative; cursor: pointer; outline: none;
   }
-
-  /* ▼▼▼ TAMBAHKAN ATURAN BARU DI BAWAH INI ▼▼▼ */
-  /* Sembunyikan grup rotor ekstra (ke-5 dan seterusnya) pada FlipDown utama (#flipdown) */
-  #flipdown .rotor-group:nth-child(n+5) {
-    display: none !important;
+  .neon-db-button:hover, .neon-db-button:focus {
+    color: #FFF; border-color: #FFFACD; background-color: #1A2C5B;
+    box-shadow: 0 0 5px #FFFACD,0 0 12px #FFFACD,0 0 25px #FFEA00,0 0 45px #FFAB00,inset 0 0 6px rgba(255,250,205,.7);
+    transform: translateY(-2px);
   }
-  /* ▲▲▲ AKHIR ATURAN BARU ▲▲▲ 
-  
-/* ▼▼▼ CSS OVERRIDE UNTUK MENGHILANGKAN "TITIK ABU-ABU" DARI pseudo_jam (1).txt ▼▼▼ */
-    /* Jika "titik abu-abu" masih muncul karena style dari flipdown.min.css atau sumber lain */
-
-    /* 1. Netralkan background-color untuk ::after dan ::before pada grup Jam & Menit */
-    .flipdown.flipdown__theme-light .rotor-group:nth-child(n+2):nth-child(-n+3)::before,
-    .flipdown.flipdown__theme-light .rotor-group:nth-child(n+2):nth-child(-n+3)::after {
-      background-color: transparent !important; /* Ubah jadi transparan */
-    }
-
-    /* 2. Netralkan style yang membuat bentuk titik pada ::after grup Jam & Menit */
-    /* Selector ini menargetkan ::after dari grup Jam dan Menit secara spesifik */
-    .flipdown .rotor-group:nth-child(n+2):nth-child(-n+3)::after {
-      /* Biarkan 'content' diatur oleh aturan label utama di bawah.
-         Kita hanya fokus menghilangkan bentuk visual titik/lingkaran dari ::after ini. */
-      width: auto !important;         /* Jangan paksa lebar 10px, biarkan auto */
-      height: auto !important;        /* Jangan paksa tinggi 10px, biarkan auto */
-      border-radius: 0 !important;    /* Hilangkan bentuk lingkaran */
-      /* 'position', 'bottom', 'left' dari aturan "titik" akan kalah oleh !important 
-         dari aturan label teks jika selectornya sama-sama menargetkan ::after ini.
-         Yang penting adalah bentuk visualnya (width, height, background, border-radius) dinetralkan.
-      */
-    }
-    /* ▲▲▲ AKHIR CSS OVERRIDE UNTUK "TITIK ABU-ABU" ▲▲▲ */  
-
-/* ▼▼▼ STYLING LENGKAP UNTUK SECTION TESTIMONI ▼▼▼ */
-
-/* Pastikan @font-face untuk NotoSansJP sudah ada di bagian atas <style> Anda */
-/* Contoh:
-@font-face {
-  font-family: 'NotoSansJP';
-  src: url('./fonts/NotoSansJP.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'NotoSansJP';
-  src: url('./fonts/NotoSansJP-Bold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}
-*/
-
-.testimonials-section {
-  margin-top: 40px; /* Jarak dari elemen di atasnya */
-  padding-top: 30px; 
-  border-top: 1px solid #e5e7eb; /* Garis pemisah tipis opsional */
-}
-
-.testimonials-title {
-  font-family: 'Helvetica', sans-serif; /* Pastikan font ini sudah di-load */
-  font-size: 24px; 
-  color: #000000; /* Warna oranye, sesuaikan */
-  text-align: left;
-  margin-bottom: 30px; 
-}
-
-.testimonial-manga-3frame {
-  display: flex;
-  align-items: flex-start; /* Atas avatar sejajar dengan atas bubble container */
-  margin-bottom: 30px; /* Jarak antar testimoni */
-  max-width: 100%; /* Agar mengisi lebar kontainer di dalamnya (misal .promo-section-container) */
-}
-
-.testimonial-avatar-manga {
-  width: 100px;  /* Ukuran avatar yang Anda inginkan */
-  height: 100px; 
-  border-radius: 0; /* Kotak */
-  /* "Deketin ke kanan" -> kurangi margin-right */
-  margin-top:  23px;
-  margin-right: -18px; /* CONTOH: Perkecil jaraknya ke bubble, sesuaikan! */
-  flex-shrink: 0;
-  border: 5px solid #000000; 
-  object-fit: cover; 
-}
-
-.testimonial-bubble-3frame {
-  position: relative; /* Diperlukan untuk positioning absolut ::before (ekor) */
-  flex-grow: 1; /* Agar bubble mengisi sisa ruang horizontal */
-  display: flex;
-  flex-direction: column; /* Frame atas, tengah, bawah tersusun vertikal */
-  min-height: 216px;
-}
-
-.bubble-frame-top {
-  background-image: url('./images/frame_01.png'); 
-  background-repeat: no-repeat;
-  background-size: 100% 100%; 
-  height: 177px; /* Tinggi asli frame_01.png Anda */
-  width: 100%; 
-  position: relative; /* Agar bisa menampung .bubble-content-wrapper-top */
-  display: flex; /* Menggunakan flex untuk mengatur konten di dalamnya */
-  flex-direction: column;
-  box-sizing: border-box; /* Penting agar padding tidak menambah dimensi keluar */
-  z-index: 1;
-  position: relative;
-}
-
-.bubble-content-wrapper-top { /* Wrapper untuk teks di dalam frame_01 */
-  /* PENTING: Sesuaikan padding ini dengan area kosong di dalam gambar frame_01.png Anda! */
-  padding: 20px 25px 15px 25px; /* Atas, Kiri-Kanan, Bawah (Contoh) */
-  padding-left: 55px;
-  padding-top: 45px;
-  flex-grow: 1; /* Mengisi ruang yang tersedia di frame_01 */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Nama di atas, isi di tengah, timestamp di bawah jika ada */
-  overflow: hidden; /* Jika teks terlalu panjang untuk frame_01, akan dipotong */
-  height: 100%; /* Mengisi tinggi bubble-frame-top */
-  box-sizing: border-box;
-}
-
-.testimonial-buyer-name {
-  font-family: 'NotoSansJP', sans-serif;
-  font-size: 20px;
-  font-weight: bold; 
-  color: #000000; /* Solid black */
-  margin-bottom: 8px; 
-  line-height: 1.3;
-  -webkit-text-stroke-width: 0.3px;
-  margin-left: 10px;
-}
-
-.testimonial-text-content {
-  font-family: 'NotoSansJP', sans-serif;
-  font-size: 16px;
-  color: #333333; 
-  line-height: 1.5; 
-  margin-top: 0px;
-  margin-left: 10px;
-  flex-grow: 1; /* Teks mengisi ruang vertikal yang tersedia */
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-}
-
-/* Bagian tengah (frame_02) tidak dipakai, disembunyikan */
-.bubble-frame-middle {
-  display: none !important; 
-  height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
-}
-
-.bubble-frame-bottom {
-  background-image: url('./images/frame_03.png'); 
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  height: 39px; /* Tinggi asli frame_03.png */
-  width: 100%;
-  z-index: 1;
-  position: relative;
-}
-
-.testimonial-timestamp {
-  font-family: 'NotoSansJP', sans-serif;
-  font-size: 16px; 
-  color: #999999; 
-  width: 100%;
-  text-align: left; /* Timestamp rata kanan (sesuaikan) */
-  margin-left: 10px;
-  margin-bottom: -20px;
-}
-/* ▲▲▲ AKHIR STYLING TESTIMONI ▲▲▲ */
-
-/* Styling untuk Kontainer Tombol "View More" yang "Nembus" */
-.view-more-container-nembus {
-  position: absolute;
-  /* 'bottom' akan menentukan seberapa jauh bagian bawahnya dari tepi bawah .bubble-frame-bottom.
-     Jika ingin dia "nembus" ke atas, kita set 'bottom' agar dia mulai dari bawah tapi tingginya besar.
-     Misalnya, kita ingin bagian bawahnya ada di tengah .bubble-frame-bottom secara vertikal:
-     bottom: 50%; transform: translateY(50%); lalu atur height.
-     Atau, cara lebih mudah: set 'bottom' agar pangkalnya ada di dalam .bubble-frame-bottom, lalu biarkan tingginya mendorong ke atas.
-  */
-  bottom: 50px; /* CONTOH: Jarak dari dasar frame_03 ke dasar tombol. Sesuaikan! */
-  left: 50%;
-  transform: translateX(-50%); /* Menengahkan secara horizontal */
-  width: 100%; /* CONTOH: Lebar kotak transparan, sesuaikan */
-  max-width: 10000px; /* Lebar maksimal opsional */
-  bottom: 50px;
-  height: 100px;
-  background-color: #ffffffb3; /* Kotak transparan putih. Sesuaikan transparansi */
-  padding: 10px; /* Padding di dalam kotak transparan */
-  border-radius: 0px; 
-  text-align: center; 
-  z-index: 5; /* Agar di atas frame_01 dan frame_03 jika ada tumpukan aneh */
-  /* Anda mungkin perlu mengatur tinggi spesifik di sini jika ingin 'oversize' tertentu,
-     atau biarkan tingginya ditentukan oleh .view-more-button-nembus di dalamnya.
-     Jika tingginya besar, ia akan "nembus" ke atas.
-  */
-}
-
-/* Styling untuk Tombol/Link "View More" di Dalamnya */
-.view-more-button-nembus {
-  display: inline-block; 
-  background-color: #ffffff; 
-  border: 3px solid #000000; /* Outline hitam tebal */
-  padding: 10px 20px; /* Padding di dalam tombol (ini akan membuatnya lebih besar) */
-  margin-top: 50px;
-  border-radius: 0px; 
-  font-family: 'NotoSansJP', sans-serif; 
-  font-size: 15px; /* Ukuran font lebih besar */
-  font-weight: bold;
-  color: #222222; 
-  text-decoration: none; 
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.view-more-button-nembus:hover {
-  background-color: #f0f0f0; 
-  color: #000000;
-}
-.view-more-overlay-inside {
-  position: relative;
-  width: 100vw; /* Lebar viewport penuh */
-  left: 50%;
-  transform: translateX(-50%); /* Posisi horizontal sempurna */
-  max-width: 1150px; /* Sama dengan main-container */
-  height: 150px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 0px 0px 0 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: -120px 0 30px; /* Margin vertikal saja */
-  padding: 10px 20px;
-  box-sizing: border-box;
-  z-index: 10;
-}
-
-.view-more-button-nembus {
-  display: inline-block; 
-  background-color: #ffffff; 
-  border: 3px solid #000000; 
-  padding: 12px 24px; /* Sedikit lebih besar */
-  border-radius: 0px; 
-  font-family: 'NotoSansJP', sans-serif; 
-  font-size: 16px; /* Sedikit lebih besar */
-  font-weight: bold;
-  color: #222222; 
-  margin-top: 80px;
-  text-decoration: none; 
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Efek bayangan tambahan */
-}
-
-.view-more-button-nembus:hover,
-.view-more-button-nembus:active,
-.view-more-button-nembus:focus {
-  background-color: #000000 !important; 
-  color: #ffffff !important;           
-  border-color: #000000 !important;   
-  outline: none; 
-}
-
-.neon-db-button {
-  display: inline-flex; /* Tetap, untuk alignment ikon dan teks */
-  align-items: center;  /* Tetap, untuk alignment vertikal ikon dan teks */
-  
-  /* 1. Geser grup ikon dan teks ke sisi kiri tombol */
-  justify-content: flex-start; 
-
-  /* 2. Sesuaikan padding untuk mendekatkan ikon ke tepi kiri */
-  /* Padding awal kita: padding: 14px 32px; */
-  /* Sekarang kita atur padding per sisi agar lebih fleksibel: */
-  padding-top: 14px;    /* Padding atas */
-  padding-bottom: 14px; /* Padding bawah */
-  padding-left: 16px;   /* PERKECIL INI agar ikon lebih ke kiri (misal dari 32px jadi 16px) */
-  padding-right: 24px;  /* Padding kanan (bisa disesuaikan agar ada ruang setelah teks, atau samakan dengan padding-left jika simetris) */
-  
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #FFFFFF;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-decoration: none;
-  
-  background-color: #0D1B3E; /* Warna dasar tombol: Biru sangat gelap/keunguan */
-  border: 2px solid #FFD700; /* Border kuning keemasan */
-  border-radius: 50px; /* Membuat bentuk kapsul/pil */
-  
-  box-shadow: 
-    0 0 3px #FFD700,
-    0 0 8px #FFD700,
-    0 0 15px #FFEA00,
-    0 0 25px #FFAB00,
-    inset 0 0 3px rgba(255, 220, 77, 0.5); 
-
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  position: relative;
-  cursor: pointer;
-  outline: none;
-}
-
-.neon-db-button:hover,
-.neon-db-button:focus {
-  color: #FFF;
-  border-color: #FFFACD;
-  background-color: #1A2C5B;
-  box-shadow: 
-    0 0 5px #FFFACD,
-    0 0 12px #FFFACD,
-    0 0 25px #FFEA00,
-    0 0 45px #FFAB00,
-    inset 0 0 6px rgba(255, 250, 205, 0.7);
-  transform: translateY(-2px);
-}
-
-.neon-db-button:active {
-  transform: translateY(0px);
-  box-shadow: 
-    0 0 2px #FFFACD,
-    0 0 5px #FFFACD,
-    0 0 10px #FFEA00,
-    0 0 18px #FFAB00,
-    inset 0 0 2px rgba(255, 250, 205, 0.5);
-}
-
-.neon-db-button svg {
-  /* Ukuran dan margin kanan SVG sudah diatur via kelas Tailwind di HTML (misal, class="w-5 h-5 mr-2") */
-  /* Jika ingin override via CSS ini juga bisa: */
-  /* width: 1.25rem; */ /* Contoh w-5 */
-  /* height: 1.25rem; */ /* Contoh h-5 */
-  /* margin-right: 0.5rem; */ /* Contoh mr-2 */
-  /* fill: currentColor; */ /* Pastikan ini ada di tag SVG atau di sini agar warna putih */
-}
-
-.neon-db-button span {
-  position: relative;
-  z-index: 1;
-}
-
-/* ▼▼▼ KELAS BARU KHUSUS UNTUK TOMBOL DI BLOK PENAWARAN ▼▼▼ */
-.neon-penawaran-button {
-  display: inline-flex; 
-  align-items: center;  
-  justify-content: flex-start;
-  
-  /* Sesuaikan padding dan font-size di sini agar pas untuk di dalam blok penawaran */
-  padding: 10px 20px; /* Contoh: Padding lebih kecil */
-  font-size: 0.95rem;  /* Contoh: Font sedikit lebih kecil */
-  /* Atau gunakan kelas Tailwind untuk ukuran font di HTMLnya langsung: py-2 text-sm sm:text-base */
-
-  font-family: 'Poppins', sans-serif;
-  font-weight: bold;
-  color: #FFFFFF;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-decoration: none;
-  background-color: #0D1B3E; 
-  border: 2px solid #FFD700; 
-  border-radius: 50px; 
-  box-shadow: 
-    0 0 3px #FFD700,
-    0 0 8px #FFD700,
-    0 0 15px #FFEA00,
-    0 0 25px #FFAB00,
-    inset 0 0 3px rgba(255, 220, 77, 0.5); 
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  position: relative;
-  cursor: pointer;
-  outline: none;
-}
-
-.neon-penawaran-button:hover,
-.neon-penawaran-button:focus {
-  /* Salin style hover dari .neon-db-button:hover atau sesuaikan jika perlu */
-  color: #FFF;
-  border-color: #FFFACD;
-  background-color: #1A2C5B;
-  box-shadow: 
-    0 0 5px #FFFACD,
-    0 0 12px #FFFACD,
-    0 0 25px #FFEA00,
-    0 0 45px #FFAB00,
-    inset 0 0 6px rgba(255, 250, 205, 0.7);
-  transform: translateY(-2px);
-}
-
-.neon-penawaran-button:active {
-  /* Salin style active dari .neon-db-button:active atau sesuaikan jika perlu */
-  transform: translateY(0px);
-  box-shadow: 
-    0 0 2px #FFFACD,
-    0 0 5px #FFFACD,
-    0 0 10px #FFEA00,
-    0 0 18px #FFAB00,
-    inset 0 0 2px rgba(255, 250, 205, 0.5);
-}
-
-.neon-penawaran-button svg {
-  /* Aturan untuk SVG di dalam .neon-penawaran-button (biasanya sama dengan .neon-db-button svg) */
-}
-
-.neon-penawaran-button span {
-  position: relative;
-  z-index: 1;
-}
-/* Container utama */
-.max-w-4xl {
-  max-width: 56rem;
-}
-
-/* Penyesuaian timer */
-.promo-timer-section-wrapper {
-  width: 100%;
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  animation: pulse 2s infinite;
-}
-
-/* Layout responsif */
-@media (max-width: 768px) {
-  .md\:w-1\/2 {
-    width: 100%;
+  .neon-db-button:active {
+    transform: translateY(0px);
+    box-shadow: 0 0 2px #FFFACD,0 0 5px #FFFACD,0 0 10px #FFEA00,0 0 18px #FFAB00,inset 0 0 2px rgba(255,250,205,.5);
   }
-  .promo-timer-section-wrapper {
-    margin-top: 1rem;
+  .neon-db-button span { position: relative; z-index: 1; }
+  .neon-penawaran-button {
+    display: inline-flex; align-items: center; justify-content: flex-start;
+    padding: 10px 20px; font-size: .95rem; font-family: 'Poppins',sans-serif;
+    font-weight: bold; color: #FFF; text-transform: uppercase; letter-spacing: 1px;
+    text-decoration: none; background-color: #0D1B3E; border: 2px solid #FFD700;
+    border-radius: 50px;
+    box-shadow: 0 0 3px #FFD700,0 0 8px #FFD700,0 0 15px #FFEA00,0 0 25px #FFAB00,inset 0 0 3px rgba(255,220,77,.5);
+    transition: all .3s cubic-bezier(.25,.8,.25,1); position: relative; cursor: pointer; outline: none;
   }
-}
+  .neon-penawaran-button:hover, .neon-penawaran-button:focus {
+    color: #FFF; border-color: #FFFACD; background-color: #1A2C5B;
+    box-shadow: 0 0 5px #FFFACD,0 0 12px #FFFACD,0 0 25px #FFEA00,0 0 45px #FFAB00,inset 0 0 6px rgba(255,250,205,.7);
+    transform: translateY(-2px);
+  }
+  .neon-penawaran-button:active {
+    transform: translateY(0px);
+    box-shadow: 0 0 2px #FFFACD,0 0 5px #FFFACD,0 0 10px #FFEA00,0 0 18px #FFAB00,inset 0 0 2px rgba(255,250,205,.5);
+  }
+  .neon-penawaran-button span { position: relative; z-index: 1; }
 
-/* Animasi pulse */
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-  100% { transform: scale(1); }
-}
-  </style>
+</style>
 </head>
 
 <body class="bg-gray-900">
@@ -921,17 +447,16 @@
     <video autoplay loop muted playsinline class="absolute w-full h-full object-cover opacity-70">
       <source src="./images/bg-video.webm" type="video/webm">
     </video>
-    
-    <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
-<h1 class="teks-dragon mb-6 md:mb-8">MASIH INGAT PERTARUNGAN GOKU VS FRIEZA?</h1>
+  <div class="pixel-grid-overlay absolute inset-0 z-[1]"></div> 
+    <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-4 z-[2]">
+<h1 class="teks-dragon text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-[4rem] mb-4 md:mb-6">MASIH INGAT PERTARUNGAN<br class="pemotong-mobile"> GOKU VS FRIEZA?</h1>
 
   <div class="mb-6 md:mb-8 max-w-2xl mx-auto">
-    <p class="text-xl sm:text-2xl text-yellow-300 font-poppins-sb mb-3 leading-tight" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">
-      Koleksi Lengkap! Seluruh Anime Dragon Ball Series (Goku Kecil, DBZ, GT, Super sampai Daima)
-    </p>
-    <p class="text-xl sm:text-1xl text-gray-100 font-poppins-sb leading-tight" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
-      Tanpa Iklan, Tanpa Ribet, Langsung di HP lo!
-    </p>
+<p class="text-base sm:text-lg md:text-xl text-yellow-300 font-poppins-sb mb-2 sm:mb-3 leading-normal" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">
+  <span class="sm:hidden">Koleksi Anime DB Terlengkap!<br>(Dragon Ball Series s/d Daima)</span> <span class="hidden sm:inline">Koleksi Lengkap! Seluruh Anime Dragon Ball Series <br>(Goku Kecil, DBZ, GT, Super sampai Daima)</span> </p>
+<p class="text-sm sm:text-base md:text-lg text-gray-100 font-poppins-sb leading-tight" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
+  Tanpa Iklan, Tanpa Ribet, Langsung di HP lo!
+</p>
   </div>
 
 <div class="flex flex-col md:flex-row items-center justify-center gap-x-6 gap-y-4 mt-6 md:mt-8 w-full">
@@ -949,7 +474,7 @@
 <div class="bg-black bg-opacity-50 backdrop-blur-sm px-6 py-3 rounded-lg shadow-md inline-block">
   <p class="font-mono text-base text-gray-100">
     PROMO BERAKHIR DALAM: 
-    <br><span id="promo-header-timer" class="text-yellow-300 font-bold text-5xl tracking-wider">00:00:00</span>
+    <br><span id="promo-header-timer" class="text-yellow-300 font-bold text-3xl sm:text-4xl md:text-5xl tracking-normal md:tracking-wider">00:00:00</span>
   </p>
 </div>
 
@@ -959,12 +484,31 @@
   </section>
 
   <!-- COMIC SECTION WITH HORIZONTAL SCROLL CARDS -->
-  <section class="comic-bg py-16 px-4">
+  <section class="comic-bg py-8 px-4">
     <div class="max-w-7xl mx-auto">
-      <h2 class="font-saiyan text-3xl md:text-4xl text-yellow-400 text-center mb-12"
-          style="text-shadow: none; -webkit-text-stroke: 0.9px #000; color: #FFD700;">
-        KUALITAS HD • SUB INDO • NO BUFFERING • LIFETIME ACCESS
-      </h2>
+<h2 class="text-center mb-6 md:mb-12">
+
+  <span class="block md:hidden text-left">
+    <span class="font-helvetica-custom text-black text-[18px] font-bold leading-tight">
+      KUALITAS HD <span class="text-gray-400 mx-1">|</span> SUB INDO<br>
+      NO BUFFERING <span class="text-gray-400 mx-1">|</span> LIFETIME ACCESS
+    </span>
+  </span>
+
+  <span class="hidden md:block lg:hidden">
+    <span class="font-saiyan text-yellow-400 text-5xl leading-snug" style="color: #FFD700; -webkit-text-stroke: 0.9px #000; text-shadow: none;">
+      KUALITAS HD • SUB INDO<br>NO BUFFERING • LIFETIME ACCESS
+    </span>
+  </span>
+
+  <span class="hidden lg:block">
+    <span class="font-saiyan text-yellow-400 text-3xl xl:text-4xl leading-snug"
+          style="color: #FFD700; -webkit-text-stroke: 0.9px #000; text-shadow: none;">
+      KUALITAS HD • SUB INDO • NO BUFFERING • LIFETIME ACCESS
+    </span>
+  </span>
+
+</h2>
       
       <div class="scroll-wrapper">
         <button class="nav-arrow arrow-left" id="scrollLeft">‹</button>
@@ -1219,10 +763,10 @@
   <!-- FEATURE SECTION WITH CLEAN CARDS -->
   <section class="comic-bg pb-16">
     <div class="main-container">
-      <h2 class="font-saiyan text-3xl text-yellow-400 text-center mb-8"
-	      style="text-shadow: none; -webkit-text-stroke: 0.9px #000; color: #FFD700;">
-        KEUNGGULAN KOLEKSI KAMI
-      </h2>
+<h2 class="font-saiyan text-[26px] sm:text-2xl md:text-3xl text-yellow-400 text-left md:text-center mb-6 md:mb-8"
+    style="text-shadow: none; -webkit-text-stroke: 0.9px #000; color: #FFD700;">
+  KEUNGGULAN KOLEKSI KAMI
+</h2>
       
       <div class="feature-cards">
         <!-- Card 1 - Hybrid Image Format -->
@@ -1277,39 +821,50 @@
       </div>
     </div>
   </section>
-	<section class="comic-bg py-16">
+	<section class="comic-bg pb-8 px-4">
 	  <div class="main-container">
 		<!-- WRAPPER PUTIH -->
 		<div class="bg-white rounded-2xl p-8 shadow-lg">
 
 		  <!-- === BONUS GAME === -->
-		  <div class="flex flex-col md:flex-row items-center gap-8 mb-16">
-			<!-- Video -->
-			<div class="w-full md:w-1/2 overflow-hidden rounded-xl">
-			  <video class="w-full h-auto" autoplay loop muted playsinline>
-				<source src="./images/dbz-gameplay.webm" type="video/webm">
-			  </video>
-			</div>
+<div class="flex flex-col lg:flex-row lg:items-start items-center gap-8 mb-16">
+  <div class="w-full lg:w-1/2 overflow-hidden rounded-xl mb-6 lg:mb-0"> <video class="w-full h-auto" autoplay loop muted playsinline>
+      <source src="./images/dbz-gameplay.webm" type="video/webm">
+    </video>
+  </div>
 
-			<!-- Teks -->
-			<div class="w-full md:w-1/2 space-y-4">
-			  <h3 class="text-3xl text-gray-800 font-helvetica">🎮 BONUS GAME DBZ!</h3>
-			  <p class="text-gray-800">
-				Dapatkan <span class="text-red-600 font-bold">Dragon Ball Z: Legacy</span> 
-				<span class="bg-red-600 text-white px-2 py-1 rounded-md text-sm ml-2">TERBATAS</span>
-			  </p>
-				<ul class="list-disc pl-5 space-y-2 text-gray-800 font-medium">
-				  <li>Versi lengkap game premium <span class="text-emerald-600">(tanpa iklan/in-app purchase)</span></li>
-				  <li>Karakter eksklusif: <span class="text-red-600 font-bold">SSJ4 Gogeta</span> + 5 hidden fighters</li>
-				  <li>Support perangkat: <span class="text-blue-600">Android 10+ / iOS 15+</span></li>
-				</ul>
-			  <div class="bg-gray-100 p-3 rounded-lg mt-4">
-				<p class="text-red-600 font-bold flex items-center gap-2">
-				  ⚠️ <span>Hanya 30/100 slot tersedia!</span>
-				</p>
-			  </div>
-			</div>
-		  </div>
+<div class="w-full lg:w-1/2 space-y-4">
+  <h3 class="text-lg sm:text-xl md:text-2xl lg:text-2xl text-gray-800 font-helvetica-custom">🎮 BONUS GAME DBZ!</h3>
+  
+  <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-800">
+    <span class="block md:hidden">
+      Dapatkan Game<br>
+      <span class="text-red-600 font-bold">Dragon Ball Z: Legacy</span>
+      <span class="bg-red-600 text-white px-1 py-0.5 text-[10px] sm:text-xs align-middle ml-1 rounded">TERBATAS</span>
+    </span>
+    <span class="hidden md:block lg:hidden whitespace-nowrap">
+      Dapatkan <span class="text-red-600 font-bold">Dragon Ball Z: Legacy</span>
+      <span class="bg-red-600 text-white px-2 py-1 text-sm align-middle ml-1 rounded-md">TERBATAS</span>
+    </span>
+    <span class="hidden lg:block whitespace-nowrap">
+      Dapatkan <span class="text-red-600 font-bold">Dragon Ball Z: Legacy</span>
+      <span class="bg-red-600 text-white px-2 py-1 text-sm align-middle ml-1 rounded-md">TERBATAS</span>
+    </span>
+  </p>
+  
+  <ul class="list-disc pl-5 space-y-2 text-sm sm:text-base md:text-lg lg:text-xl text-gray-800 font-medium">
+    <li>Versi lengkap game premium<br class="break-phone-list"> <span class="text-emerald-600">(tanpa iklan/in-app purchase)</span></li>
+    <li>Karakter eksklusif:<br class="break-phone-list"> <span class="text-red-600 font-bold">SSJ4 Gogeta</span> + 5 hidden fighters</li>
+    <li>Support perangkat:<br class="break-phone-list"> <span class="text-blue-600">Android 10+</span> / iOS 15+</li>
+  </ul>
+  
+  <div class="bg-gray-100 p-3 rounded-lg mt-4 text-sm sm:text-base md:text-lg lg:text-xl">
+    <p class="text-red-600 font-bold flex items-center gap-2">
+      ⚠️ <span>Hanya 30/100 slot tersedia!</span>
+    </p>
+  </div>
+</div>
+</div>
 
 		  <!-- === CTA VEGETA === -->
 		  <div class="relative flex justify-center items-center mb-10">
