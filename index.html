@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dragon Ball Ultimate Collection</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flipdown@0.3.2/dist/flipdown.min.css">
+  <style>
+    /* FONT FACES */
+    @font-face {
+      font-family: 'Saiyan Sans';
+      src: url('./images/SaiyanSansRegular.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'Poppins';
+      src: url('./images/Poppins-SemiBold.ttf') format('truetype');
+      font-weight: 600;
+    }
+    @font-face {
+      font-family: 'Helvetica';
+      src: url('./images/HelveticaNeueHeavy.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'NotoSansJP';
+      src: url('./images/NotoSansJP.ttf') format('truetype'); 
+      font-weight: normal;
+      font-style: normal;
+    }	
+
+    /* GLOBAL STYLES */
+    body {
+      background-color: #0f172a;
+      font-family: 'Helvetica', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    
+    .font-saiyan {
+      font-family: 'Saiyan Sans', sans-serif;
+      letter-spacing: 2px;
+    }
+    
+    .font-poppins-sb {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+
+    /* MAIN CONTAINER */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      height: 60vh;
+      min-height: 400px;
+      position: relative;
+      z-index: 30;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .hero-section video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.7;
+    }
+
+  .teks-dragon {
+    /* Warna teks kuning solid */
+    color: #FFD700;
+    font-family: 'Saiyan Sans', sans-serif;
+    font-size: 4rem;
+    font-weight: regular;
+    
+    /* Outline keluar dengan text-shadow */
+    text-shadow: 
+      0 0 15px #5D2906,
+      0 0 15px #5D2906,
+      0 0 15px #5D2906,
+      0 0 15px #5D2906,
+      0 0 15px #5D2906;
+    
+    /* Padding untuk ruang outline */
+    padding: 0.2em;
+    display: inline-block;
+  }
+  
+    /* COMIC BACKGROUND */
+    .comic-bg {
+      background-image: url('./images/bg_comics_sp.jpg');
+      background-size: contain;
+      background-repeat: repeat;
+      background-position: center;
+      padding: 4rem 0;
+    }
+
+    /* HORIZONTAL SCROLL CARDS - CRUNCHYROLL STYLE */
+    .scroll-wrapper {
+      position: relative;
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .cards-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      gap: 20px;
+      padding: 16px 0;
+      margin: 0;
+    }
+
+    .cards-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* UPDATED CARD STYLE WITH HOVER EFFECTS */
+    .card {
+      flex: 0 0 auto;
+      width: 260px;
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 347px;
+      background-size: cover;
+      background-position: center;
+      transition: all 0.3s ease;
+    }
+
+    .card-hover-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .card:hover .card-hover-content {
+      opacity: 1;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 20px;
+      color: #FFD700;
+      margin-bottom: 8px;
+    }
+
+    .card-rating {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+
+    .card-rating-stars {
+      color: #FFD700;
+      font-size: 16px;
+    }
+
+    .card-meta {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .card-description {
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* MARVEL-STYLE CIRCLE PORTRAITS */
+    .character-circle {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 30px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      border: 8px solid white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* FEATURE CARDS */
+    .feature-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+      margin: 40px 0;
+    }
+
+    .feature-card {
+      background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(30,30,30,0.9) 100%);
+      border-radius: 12px;
+      padding: 25px 15px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(255,215,0,0.1);
+    }
+
+    .feature-title {
+      font-family: 'Saiyan Sans', sans-serif;
+      color: #FFD700;
+      font-size: 22px;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    .feature-desc {
+      color: white;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* NAV ARROWS */
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 120px;
+      background-color: rgba(30, 30, 30, 0.9);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .nav-arrow:hover {
+      background-color: rgba(60, 60, 60, 0.9);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .arrow-left {
+      left: -20px;
+    }
+
+    .arrow-right {
+      right: -20px;
+    }
+
+    /* CTA BUTTON */
+    .cta-dragonball {
+      background: linear-gradient(to right, #FF0000, #FF8C00);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+      transition: all 0.3s ease;
+      color: white;
+      font-size: 1.125rem;
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .cta-dragonball:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255, 215, 0, 1);
+    }
+
+    /* PROMO TIMER (Old one, new is .promo-timer-section-wrapper) */
+    .promo-timer {
+      background: linear-gradient(135deg, #8B0000, #FF0000);
+      border: 2px solid #FFD700;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    /* RESPONSIVE ADJUSTMENTS */
+    @media (max-width: 768px) {
+      .feature-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .character-circle {
+        width: 140px;
+        height: 140px;
+      }
+      .scroll-wrapper {
+        padding: 0 30px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .feature-cards {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        width: 240px;
+      }
+      .card-image {
+        height: 320px;
+      }
+    }
+	
+  /* FLIPDOWN TIMER STYLES */
+  .promo-timer-section-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 30px 45px 30px; /* Bottom padding increased for labels */
+    background: linear-gradient(135deg, #8B0000, #FF0000);
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+    border-radius: 12px;
+    margin: 20px auto;
+    max-width: fit-content;
+    animation: pulse 2s infinite;
+  }
+
+  .promo-timer-text-line {
+    color: #fff;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  /* Main FlipDown container */
+  .flipdown {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important; /* MODIFIKASI: Diubah dari flex-start ke center */
+    gap: 15px !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    height: auto !important;
+    width: fit-content !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .flipdown-wrapper { /* Internal FlipDown wrapper */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important; /* Usually flex-start for internal parts */
+    padding: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .flipdown .rotor-group { /* Each number group (e.g., Hours) */
+    position: relative !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: row !important; /* Digits side-by-side */
+    align-items: center !important; /* Vertically center digits in their group */
+    flex-shrink: 0;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .flipdown .rotor-group-heading { /* Default FlipDown labels */
+    display: none !important;
+  }
+
+  /* Custom labels (Hari, Jam, Menit, Detik) */
+  .flipdown .rotor-group:after {
+    content: attr(data-label) !important;
+    position: absolute !important;
+    bottom: -28px !important; /* Adjust if needed based on total height */
+    left: 50% !important;
+    transform: translateX(-50%) !important; /* Standard centering */
+    font-size: 13px !important;
+    color: #fff !important;
+    font-weight: bold !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    text-transform: uppercase;
+     /* Pastikan tidak ada style di sini yang membuat titik/lingkaran lagi */
+      background-color: transparent !important; /* Pastikan background transparan */
+      width: auto !important;                  /* Pastikan lebar auto */
+      height: auto !important;                 /* Pastikan tinggi auto */
+      border-radius: 0 !important;             /* Pastikan tidak ada border-radius */
+    }	
+
+  /* === OPSIONAL: Penyesuaian Centering untuk Label JAM & MENIT === */
+  /* Jika label JAM ( grup ke-2 setelah HARI yg hidden) masih kurang tengah: */
+  /* .flipdown .rotor-group:nth-child(2):after { */
+  /* transform: translateX(-52%) !important; /* Coba geser sedikit ke kiri, sesuaikan nilainya */ */
+  /* } */
+
+  /* Jika label MENIT ( grup ke-3 setelah HARI yg hidden) masih kurang tengah: */
+  /* .flipdown .rotor-group:nth-child(3):after { */
+  /* transform: translateX(-52%) !important; /* Coba geser sedikit ke kiri, sesuaikan nilainya */ */
+  /* } */
+
+
+  /* Colon separator (divider) */
+  .flipdown .rotor-group-divider {
+    display: none !important;
+  }
+
+  .flipdown .rotor { /* Individual digit flipper */
+    vertical-align: middle !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .flipdown .rotor-top,
+  .flipdown .rotor-bottom,
+  .flipdown .rotor-leaf,
+  .flipdown .rotor-leaf-top,
+  .flipdown .rotor-leaf-bottom {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Hide Days group if not needed */
+  .flipdown .rotor-group:nth-child(1) {
+    display: none !important;
+  }
+
+  /* ▼▼▼ TAMBAHKAN ATURAN BARU DI BAWAH INI ▼▼▼ */
+  /* Sembunyikan grup rotor ekstra (ke-5 dan seterusnya) pada FlipDown utama (#flipdown) */
+  #flipdown .rotor-group:nth-child(n+5) {
+    display: none !important;
+  }
+  /* ▲▲▲ AKHIR ATURAN BARU ▲▲▲ 
+  
+/* ▼▼▼ CSS OVERRIDE UNTUK MENGHILANGKAN "TITIK ABU-ABU" DARI pseudo_jam (1).txt ▼▼▼ */
+    /* Jika "titik abu-abu" masih muncul karena style dari flipdown.min.css atau sumber lain */
+
+    /* 1. Netralkan background-color untuk ::after dan ::before pada grup Jam & Menit */
+    .flipdown.flipdown__theme-light .rotor-group:nth-child(n+2):nth-child(-n+3)::before,
+    .flipdown.flipdown__theme-light .rotor-group:nth-child(n+2):nth-child(-n+3)::after {
+      background-color: transparent !important; /* Ubah jadi transparan */
+    }
+
+    /* 2. Netralkan style yang membuat bentuk titik pada ::after grup Jam & Menit */
+    /* Selector ini menargetkan ::after dari grup Jam dan Menit secara spesifik */
+    .flipdown .rotor-group:nth-child(n+2):nth-child(-n+3)::after {
+      /* Biarkan 'content' diatur oleh aturan label utama di bawah.
+         Kita hanya fokus menghilangkan bentuk visual titik/lingkaran dari ::after ini. */
+      width: auto !important;         /* Jangan paksa lebar 10px, biarkan auto */
+      height: auto !important;        /* Jangan paksa tinggi 10px, biarkan auto */
+      border-radius: 0 !important;    /* Hilangkan bentuk lingkaran */
+      /* 'position', 'bottom', 'left' dari aturan "titik" akan kalah oleh !important 
+         dari aturan label teks jika selectornya sama-sama menargetkan ::after ini.
+         Yang penting adalah bentuk visualnya (width, height, background, border-radius) dinetralkan.
+      */
+    }
+    /* ▲▲▲ AKHIR CSS OVERRIDE UNTUK "TITIK ABU-ABU" ▲▲▲ */  
+
+/* ▼▼▼ STYLING LENGKAP UNTUK SECTION TESTIMONI ▼▼▼ */
+
+/* Pastikan @font-face untuk NotoSansJP sudah ada di bagian atas <style> Anda */
+/* Contoh:
+@font-face {
+  font-family: 'NotoSansJP';
+  src: url('./fonts/NotoSansJP.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NotoSansJP';
+  src: url('./fonts/NotoSansJP-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+*/
+
+.testimonials-section {
+  margin-top: 40px; /* Jarak dari elemen di atasnya */
+  padding-top: 30px; 
+  border-top: 1px solid #e5e7eb; /* Garis pemisah tipis opsional */
+}
+
+.testimonials-title {
+  font-family: 'Helvetica', sans-serif; /* Pastikan font ini sudah di-load */
+  font-size: 24px; 
+  color: #000000; /* Warna oranye, sesuaikan */
+  text-align: left;
+  margin-bottom: 30px; 
+}
+
+.testimonial-manga-3frame {
+  display: flex;
+  align-items: flex-start; /* Atas avatar sejajar dengan atas bubble container */
+  margin-bottom: 30px; /* Jarak antar testimoni */
+  max-width: 100%; /* Agar mengisi lebar kontainer di dalamnya (misal .promo-section-container) */
+}
+
+.testimonial-avatar-manga {
+  width: 100px;  /* Ukuran avatar yang Anda inginkan */
+  height: 100px; 
+  border-radius: 0; /* Kotak */
+  /* "Deketin ke kanan" -> kurangi margin-right */
+  margin-top:  23px;
+  margin-right: -18px; /* CONTOH: Perkecil jaraknya ke bubble, sesuaikan! */
+  flex-shrink: 0;
+  border: 5px solid #000000; 
+  object-fit: cover; 
+}
+
+.testimonial-bubble-3frame {
+  position: relative; /* Diperlukan untuk positioning absolut ::before (ekor) */
+  flex-grow: 1; /* Agar bubble mengisi sisa ruang horizontal */
+  display: flex;
+  flex-direction: column; /* Frame atas, tengah, bawah tersusun vertikal */
+  min-height: 216px;
+}
+
+.bubble-frame-top {
+  background-image: url('./images/frame_01.png'); 
+  background-repeat: no-repeat;
+  background-size: 100% 100%; 
+  height: 177px; /* Tinggi asli frame_01.png Anda */
+  width: 100%; 
+  position: relative; /* Agar bisa menampung .bubble-content-wrapper-top */
+  display: flex; /* Menggunakan flex untuk mengatur konten di dalamnya */
+  flex-direction: column;
+  box-sizing: border-box; /* Penting agar padding tidak menambah dimensi keluar */
+  z-index: 1;
+  position: relative;
+}
+
+.bubble-content-wrapper-top { /* Wrapper untuk teks di dalam frame_01 */
+  /* PENTING: Sesuaikan padding ini dengan area kosong di dalam gambar frame_01.png Anda! */
+  padding: 20px 25px 15px 25px; /* Atas, Kiri-Kanan, Bawah (Contoh) */
+  padding-left: 55px;
+  padding-top: 45px;
+  flex-grow: 1; /* Mengisi ruang yang tersedia di frame_01 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Nama di atas, isi di tengah, timestamp di bawah jika ada */
+  overflow: hidden; /* Jika teks terlalu panjang untuk frame_01, akan dipotong */
+  height: 100%; /* Mengisi tinggi bubble-frame-top */
+  box-sizing: border-box;
+}
+
+.testimonial-buyer-name {
+  font-family: 'NotoSansJP', sans-serif;
+  font-size: 20px;
+  font-weight: bold; 
+  color: #000000; /* Solid black */
+  margin-bottom: 8px; 
+  line-height: 1.3;
+  -webkit-text-stroke-width: 0.3px;
+  margin-left: 10px;
+}
+
+.testimonial-text-content {
+  font-family: 'NotoSansJP', sans-serif;
+  font-size: 16px;
+  color: #333333; 
+  line-height: 1.5; 
+  margin-top: 0px;
+  margin-left: 10px;
+  flex-grow: 1; /* Teks mengisi ruang vertikal yang tersedia */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Bagian tengah (frame_02) tidak dipakai, disembunyikan */
+.bubble-frame-middle {
+  display: none !important; 
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+.bubble-frame-bottom {
+  background-image: url('./images/frame_03.png'); 
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 39px; /* Tinggi asli frame_03.png */
+  width: 100%;
+  z-index: 1;
+  position: relative;
+}
+
+.testimonial-timestamp {
+  font-family: 'NotoSansJP', sans-serif;
+  font-size: 16px; 
+  color: #999999; 
+  width: 100%;
+  text-align: left; /* Timestamp rata kanan (sesuaikan) */
+  margin-left: 10px;
+  margin-bottom: -20px;
+}
+/* ▲▲▲ AKHIR STYLING TESTIMONI ▲▲▲ */
+
+/* Styling untuk Kontainer Tombol "View More" yang "Nembus" */
+.view-more-container-nembus {
+  position: absolute;
+  /* 'bottom' akan menentukan seberapa jauh bagian bawahnya dari tepi bawah .bubble-frame-bottom.
+     Jika ingin dia "nembus" ke atas, kita set 'bottom' agar dia mulai dari bawah tapi tingginya besar.
+     Misalnya, kita ingin bagian bawahnya ada di tengah .bubble-frame-bottom secara vertikal:
+     bottom: 50%; transform: translateY(50%); lalu atur height.
+     Atau, cara lebih mudah: set 'bottom' agar pangkalnya ada di dalam .bubble-frame-bottom, lalu biarkan tingginya mendorong ke atas.
+  */
+  bottom: 50px; /* CONTOH: Jarak dari dasar frame_03 ke dasar tombol. Sesuaikan! */
+  left: 50%;
+  transform: translateX(-50%); /* Menengahkan secara horizontal */
+  width: 100%; /* CONTOH: Lebar kotak transparan, sesuaikan */
+  max-width: 10000px; /* Lebar maksimal opsional */
+  bottom: 50px;
+  height: 100px;
+  background-color: #ffffffb3; /* Kotak transparan putih. Sesuaikan transparansi */
+  padding: 10px; /* Padding di dalam kotak transparan */
+  border-radius: 0px; 
+  text-align: center; 
+  z-index: 5; /* Agar di atas frame_01 dan frame_03 jika ada tumpukan aneh */
+  /* Anda mungkin perlu mengatur tinggi spesifik di sini jika ingin 'oversize' tertentu,
+     atau biarkan tingginya ditentukan oleh .view-more-button-nembus di dalamnya.
+     Jika tingginya besar, ia akan "nembus" ke atas.
+  */
+}
+
+/* Styling untuk Tombol/Link "View More" di Dalamnya */
+.view-more-button-nembus {
+  display: inline-block; 
+  background-color: #ffffff; 
+  border: 3px solid #000000; /* Outline hitam tebal */
+  padding: 10px 20px; /* Padding di dalam tombol (ini akan membuatnya lebih besar) */
+  margin-top: 50px;
+  border-radius: 0px; 
+  font-family: 'NotoSansJP', sans-serif; 
+  font-size: 15px; /* Ukuran font lebih besar */
+  font-weight: bold;
+  color: #222222; 
+  text-decoration: none; 
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.view-more-button-nembus:hover {
+  background-color: #f0f0f0; 
+  color: #000000;
+}
+.view-more-overlay-inside {
+  position: relative;
+  width: 100vw; /* Lebar viewport penuh */
+  left: 50%;
+  transform: translateX(-50%); /* Posisi horizontal sempurna */
+  max-width: 1150px; /* Sama dengan main-container */
+  height: 150px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 0px 0px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -120px 0 30px; /* Margin vertikal saja */
+  padding: 10px 20px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.view-more-button-nembus {
+  display: inline-block; 
+  background-color: #ffffff; 
+  border: 3px solid #000000; 
+  padding: 12px 24px; /* Sedikit lebih besar */
+  border-radius: 0px; 
+  font-family: 'NotoSansJP', sans-serif; 
+  font-size: 16px; /* Sedikit lebih besar */
+  font-weight: bold;
+  color: #222222; 
+  margin-top: 80px;
+  text-decoration: none; 
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Efek bayangan tambahan */
+}
+
+.view-more-button-nembus:hover,
+.view-more-button-nembus:active,
+.view-more-button-nembus:focus {
+  background-color: #000000 !important; 
+  color: #ffffff !important;           
+  border-color: #000000 !important;   
+  outline: none; 
+}
+
+.neon-db-button {
+  display: inline-flex; /* Tetap, untuk alignment ikon dan teks */
+  align-items: center;  /* Tetap, untuk alignment vertikal ikon dan teks */
+  
+  /* 1. Geser grup ikon dan teks ke sisi kiri tombol */
+  justify-content: flex-start; 
+
+  /* 2. Sesuaikan padding untuk mendekatkan ikon ke tepi kiri */
+  /* Padding awal kita: padding: 14px 32px; */
+  /* Sekarang kita atur padding per sisi agar lebih fleksibel: */
+  padding-top: 14px;    /* Padding atas */
+  padding-bottom: 14px; /* Padding bawah */
+  padding-left: 16px;   /* PERKECIL INI agar ikon lebih ke kiri (misal dari 32px jadi 16px) */
+  padding-right: 24px;  /* Padding kanan (bisa disesuaikan agar ada ruang setelah teks, atau samakan dengan padding-left jika simetris) */
+  
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  
+  background-color: #0D1B3E; /* Warna dasar tombol: Biru sangat gelap/keunguan */
+  border: 2px solid #FFD700; /* Border kuning keemasan */
+  border-radius: 50px; /* Membuat bentuk kapsul/pil */
+  
+  box-shadow: 
+    0 0 3px #FFD700,
+    0 0 8px #FFD700,
+    0 0 15px #FFEA00,
+    0 0 25px #FFAB00,
+    inset 0 0 3px rgba(255, 220, 77, 0.5); 
+
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  cursor: pointer;
+  outline: none;
+}
+
+.neon-db-button:hover,
+.neon-db-button:focus {
+  color: #FFF;
+  border-color: #FFFACD;
+  background-color: #1A2C5B;
+  box-shadow: 
+    0 0 5px #FFFACD,
+    0 0 12px #FFFACD,
+    0 0 25px #FFEA00,
+    0 0 45px #FFAB00,
+    inset 0 0 6px rgba(255, 250, 205, 0.7);
+  transform: translateY(-2px);
+}
+
+.neon-db-button:active {
+  transform: translateY(0px);
+  box-shadow: 
+    0 0 2px #FFFACD,
+    0 0 5px #FFFACD,
+    0 0 10px #FFEA00,
+    0 0 18px #FFAB00,
+    inset 0 0 2px rgba(255, 250, 205, 0.5);
+}
+
+.neon-db-button svg {
+  /* Ukuran dan margin kanan SVG sudah diatur via kelas Tailwind di HTML (misal, class="w-5 h-5 mr-2") */
+  /* Jika ingin override via CSS ini juga bisa: */
+  /* width: 1.25rem; */ /* Contoh w-5 */
+  /* height: 1.25rem; */ /* Contoh h-5 */
+  /* margin-right: 0.5rem; */ /* Contoh mr-2 */
+  /* fill: currentColor; */ /* Pastikan ini ada di tag SVG atau di sini agar warna putih */
+}
+
+.neon-db-button span {
+  position: relative;
+  z-index: 1;
+}
+
+/* ▼▼▼ KELAS BARU KHUSUS UNTUK TOMBOL DI BLOK PENAWARAN ▼▼▼ */
+.neon-penawaran-button {
+  display: inline-flex; 
+  align-items: center;  
+  justify-content: flex-start;
+  
+  /* Sesuaikan padding dan font-size di sini agar pas untuk di dalam blok penawaran */
+  padding: 10px 20px; /* Contoh: Padding lebih kecil */
+  font-size: 0.95rem;  /* Contoh: Font sedikit lebih kecil */
+  /* Atau gunakan kelas Tailwind untuk ukuran font di HTMLnya langsung: py-2 text-sm sm:text-base */
+
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  background-color: #0D1B3E; 
+  border: 2px solid #FFD700; 
+  border-radius: 50px; 
+  box-shadow: 
+    0 0 3px #FFD700,
+    0 0 8px #FFD700,
+    0 0 15px #FFEA00,
+    0 0 25px #FFAB00,
+    inset 0 0 3px rgba(255, 220, 77, 0.5); 
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  cursor: pointer;
+  outline: none;
+}
+
+.neon-penawaran-button:hover,
+.neon-penawaran-button:focus {
+  /* Salin style hover dari .neon-db-button:hover atau sesuaikan jika perlu */
+  color: #FFF;
+  border-color: #FFFACD;
+  background-color: #1A2C5B;
+  box-shadow: 
+    0 0 5px #FFFACD,
+    0 0 12px #FFFACD,
+    0 0 25px #FFEA00,
+    0 0 45px #FFAB00,
+    inset 0 0 6px rgba(255, 250, 205, 0.7);
+  transform: translateY(-2px);
+}
+
+.neon-penawaran-button:active {
+  /* Salin style active dari .neon-db-button:active atau sesuaikan jika perlu */
+  transform: translateY(0px);
+  box-shadow: 
+    0 0 2px #FFFACD,
+    0 0 5px #FFFACD,
+    0 0 10px #FFEA00,
+    0 0 18px #FFAB00,
+    inset 0 0 2px rgba(255, 250, 205, 0.5);
+}
+
+.neon-penawaran-button svg {
+  /* Aturan untuk SVG di dalam .neon-penawaran-button (biasanya sama dengan .neon-db-button svg) */
+}
+
+.neon-penawaran-button span {
+  position: relative;
+  z-index: 1;
+}
+/* Container utama */
+.max-w-4xl {
+  max-width: 56rem;
+}
+
+/* Penyesuaian timer */
+.promo-timer-section-wrapper {
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  animation: pulse 2s infinite;
+}
+
+/* Layout responsif */
+@media (max-width: 768px) {
+  .md\:w-1\/2 {
+    width: 100%;
+  }
+  .promo-timer-section-wrapper {
+    margin-top: 1rem;
+  }
+}
+
+/* Animasi pulse */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+  </style>
+</head>
+
+<body class="bg-gray-900">
+  <!-- HERO SECTION -->
+  <section class="hero-section overflow-hidden">
+    <video autoplay loop muted playsinline class="absolute w-full h-full object-cover opacity-70">
+      <source src="./images/bg-video.webm" type="video/webm">
+    </video>
+    
+    <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
+<h1 class="teks-dragon mb-6 md:mb-8">MASIH INGAT PERTARUNGAN GOKU VS FRIEZA?</h1>
+
+  <div class="mb-6 md:mb-8 max-w-2xl mx-auto">
+    <p class="text-xl sm:text-2xl text-yellow-300 font-poppins-sb mb-3 leading-tight" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">
+      Koleksi Lengkap! Seluruh Anime Dragon Ball Series (Goku Kecil, DBZ, GT, Super sampai Daima)
+    </p>
+    <p class="text-xl sm:text-1xl text-gray-100 font-poppins-sb leading-tight" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
+      Tanpa Iklan, Tanpa Ribet, Langsung di HP lo!
+    </p>
+  </div>
+
+<div class="flex flex-col md:flex-row items-center justify-center gap-x-6 gap-y-4 mt-6 md:mt-8 w-full">
+  <a href="#" class="neon-db-button flex items-center justify-center whitespace-nowrap py-2 px-6 md:py-3 md:px-8">
+    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 300.005 300.005">
+      <!-- SVG ASLI (Tidak Diubah) -->
+      <path d="M149.354,146.641c-4.298,0-7.781,3.483-7.781,7.781v54.541c0,4.298,3.483,7.781,7.781,7.781 c4.295,0,7.781-3.483,7.781-7.781v-54.541C157.135,150.124,153.648,146.641,149.354,146.641z"/>
+      <path d="M111.7,146.641c-4.298,0-7.781,3.483-7.781,7.781v54.541c0,4.298,3.483,7.781,7.781,7.781 c4.298,0,7.781-3.483,7.781-7.781v-54.541C119.481,150.124,115.997,146.641,111.7,146.641z"/>
+      <path d="M187.005,146.641c-4.3,0-7.781,3.483-7.781,7.781v54.541c0,4.298,3.481,7.781,7.781,7.781 c4.295,0,7.781-3.483,7.781-7.781v-54.541C194.786,150.124,191.301,146.641,187.005,146.641z"/>
+      <path d="M150,0C67.159,0,0.002,67.162,0.002,150S67.159,300.005,150,300.005S300.003,232.841,300.003,150S232.841,0,150,0z M231.341,153.208l-11.495,67.961c0,6.634-5.379,12.014-12.016,12.014H90.875c-6.634,0-12.014-5.379-12.014-12.014 l-11.495-67.961c-4.451-3.582-7.358-9.005-7.358-15.157c0-10.312,8.001-18.736,18.127-19.452l33.087-48.389 c2.425-3.545,7.262-4.458,10.815-2.031c3.548,2.428,4.456,7.267,2.031,10.815l-27.031,39.535h104.64l-27.036-39.535 c-2.428-3.548-1.52-8.388,2.031-10.815c3.545-2.425,8.388-1.512,10.815,2.031l33.09,48.389 c10.12,0.718,18.119,9.143,18.119,19.452C238.697,144.206,235.789,149.627,231.341,153.208z"/>
+    </svg>
+    <span>BELI SEKARANG!</span>
+  </a>
+
+<div class="bg-black bg-opacity-50 backdrop-blur-sm px-6 py-3 rounded-lg shadow-md inline-block">
+  <p class="font-mono text-base text-gray-100">
+    PROMO BERAKHIR DALAM: 
+    <br><span id="promo-header-timer" class="text-yellow-300 font-bold text-5xl tracking-wider">00:00:00</span>
+  </p>
+</div>
+
+  </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMIC SECTION WITH HORIZONTAL SCROLL CARDS -->
+  <section class="comic-bg py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="font-saiyan text-3xl md:text-4xl text-yellow-400 text-center mb-12"
+          style="text-shadow: none; -webkit-text-stroke: 0.9px #000; color: #FFD700;">
+        KUALITAS HD • SUB INDO • NO BUFFERING • LIFETIME ACCESS
+      </h2>
+      
+      <div class="scroll-wrapper">
+        <button class="nav-arrow arrow-left" id="scrollLeft">‹</button>
+        
+        <div class="cards-container" id="cardsContainer">
+          <!-- Dragon Ball Card -->
+          <div class="card">
+            <div class="card-image" style="background-image: url('./images/db-ba.jpg');"></div>
+            <div class="card-badge">Sub | Dub</div>
+            <div class="card-hover-content">
+              <h3 class="card-title">Dragon Ball</h3>
+              <div class="card-rating">
+                <span class="card-rating-stars">★★★★☆</span>
+                <span>4.7 (18K)</span>
+              </div>
+              <div class="card-meta">
+                <span>9 Seasons</span>
+                <span>153 Episodes</span>
+              </div>
+              <p class="card-description">
+                Ikuti petualangan Goku dari kecil sampai dewasa saat ia berlatih seni bela diri dan mencari tujuh Dragon Ball.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Dragon Ball Z Card -->
+          <div class="card">
+            <div class="card-image" style="background-image: url('./images/db-z.jpg');"></div>
+            <div class="card-badge">Sub | Dub</div>
+            <div class="card-hover-content">
+              <h3 class="card-title">Dragon Ball Z</h3>
+              <div class="card-rating">
+                <span class="card-rating-stars">★★★★★</span>
+                <span>4.9 (42K)</span>
+              </div>
+              <div class="card-meta">
+                <span>9 Seasons</span>
+                <span>291 Episodes</span>
+              </div>
+              <p class="card-description">
+                Goku mempertahankan Bumi melawan musuh kuat dari luar angkasa sambil membuka transformasi Super Saiyan baru.
+              </p>
+            </div>
+          </div>
+		  
+		<!-- Dragon Ball GT Card -->
+		<div class="card">
+		  <div class="card-image" style="background-image: url('./images/db-gt.jpg');"></div>
+		  <div class="card-badge">Sub | Dub</div>
+		  <div class="card-hover-content">
+			<h3 class="card-title">Dragon Ball GT</h3>
+			<div class="card-rating">
+			  <span class="card-rating-stars">★★★☆☆</span>
+			  <span>3.8 (12K)</span>
+			</div>
+			<div class="card-meta">
+			  <span>4 Seasons</span>
+			  <span>64 Episodes</span>
+			</div>
+			<p class="card-description">
+			  Goku dikembalikan ke tubuh anak-anak dan menjelajahi alam semesta dengan Pan dan Trunks untuk mengumpulkan Dragon Balls yang tersebar.
+			</p>
+		  </div>
+		</div>
+
+		<!-- Dragon Ball Kai Card -->
+		<div class="card">
+		  <div class="card-image" style="background-image: url('./images/db-kai.jpg');"></div>
+		  <div class="card-badge">Sub | Dub</div>
+		  <div class="card-hover-content">
+			<h3 class="card-title">Dragon Ball Kai</h3>
+			<div class="card-rating">
+			  <span class="card-rating-stars">★★★★☆</span>
+			  <span>4.5 (15K)</span>
+			</div>
+			<div class="card-meta">
+			  <span>7 Seasons</span>
+			  <span>167 Episodes</span>
+			</div>
+			<p class="card-description">
+			  Versi remaster dan diperpendek dari DBZ dengan animasi yang diperbarui, menghilangkan filler dan dengan soundtrack baru.
+			</p>
+		  </div>
+		</div>
+
+		<!-- Dragon Ball Super Card -->
+		<div class="card">
+		  <div class="card-image" style="background-image: url('./images/db-super.jpg');"></div>
+		  <div class="card-badge">Sub | Dub</div>
+		  <div class="card-hover-content">
+			<h3 class="card-title">Dragon Ball Super</h3>
+			<div class="card-rating">
+			  <span class="card-rating-stars">★★★★☆</span>
+			  <span>4.6 (32K)</span>
+			</div>
+			<div class="card-meta">
+			  <span>6 Seasons</span>
+			  <span>131 Episodes</span>
+			</div>
+			<p class="card-description">
+			  Setelah kekalahan Majin Buu, Goku dan teman-temannya menghadapi ancaman baru termasuk Dewa Kehancuran dan multiverse.
+			</p>
+		  </div>
+		</div>
+
+		<!-- Super Dragon Ball Heroes Card -->
+		<div class="card">
+		  <div class="card-image" style="background-image: url('./images/db-heroes.jpg');"></div>
+		  <div class="card-badge">Subtitled</div>
+		  <div class="card-hover-content">
+			<h3 class="card-title">Super Dragon Ball Heroes</h3>
+			<div class="card-rating">
+			  <span class="card-rating-stars">★★★☆☆</span>
+			  <span>3.5 (8K)</span>
+			</div>
+			<div class="card-meta">
+			  <span>6 Seasons</span>
+			  <span>56 Episodes</span>
+			</div>
+			<p class="card-description">
+			  Seri promosi berdasarkan permainan arcade dengan pertarungan epik melawan musuh dari berbagai garis waktu alternatif.
+			</p>
+		  </div>
+		</div>
+
+		<!-- Dragon Ball Daima Card -->
+		<div class="card">
+		  <div class="card-image" style="background-image: url('./images/db-daima.jpg');"></div>
+		  <div class="card-badge">Sub | Dub</div>
+		  <div class="card-hover-content">
+			<h3 class="card-title">Dragon Ball Daima</h3>
+			<div class="card-rating">
+			  <span class="card-rating-stars">★★★★☆</span>
+			  <span>4.7 (62K)</span>
+			</div>
+			<div class="card-meta">
+			  <span>1 Season</span>
+			  <span>20 Episodes</span>
+			</div>
+			<p class="card-description">
+			  Seri baru yang akan datang di mana Goku dan teman-temannya kembali berubah menjadi anak-anak dalam petualangan misterius.
+			</p>
+		  </div>
+		</div>
+		
+		<!-- Dragon Ball Movies Card -->
+		<div class="card">
+		  <div class="card-image" style="background-image: url('./images/db-movies.jpg');"></div>
+		  <div class="card-badge">Sub | Dub</div>
+		  <div class="card-hover-content">
+			<h3 class="card-title">Dragon Ball Movies</h3>
+			<div class="card-rating">
+			  <span class="card-rating-stars">★★★★☆</span>
+			  <span>4.6 (38K)</span>
+			</div>
+			<div class="card-meta">
+			  <span>21 Movies</span>
+			  <span>1986-2022</span>
+			</div>
+			<p class="card-description">
+			  Koleksi lengkap film non-kanon dan kanon dari seluruh seri Dragon Ball, termasuk pertarungan epik melawan Broly, Cooler, Janemba, dan ancaman lain yang tidak ada di serial TV.
+			</p>
+		  </div>
+		</div>
+
+		<!-- Dragon Ball OVAs & Specials Card -->
+		<div class="card">
+		  <div class="card-image" style="background-image: url('./images/db-ova.jpg');"></div>
+		  <div class="card-badge">Subtitled</div>
+		  <div class="card-hover-content">
+			<h3 class="card-title">Dragon Ball OVA</h3>
+			<div class="card-rating">
+			  <span class="card-rating-stars">★★★★☆</span>
+			  <span>4.4 (15K)</span>
+			</div>
+			<div class="card-meta">
+			  <span>5 OVAs + 2 TV Specials</span>
+			  <span>1990-2014</span>
+			</div>
+			<p class="card-description">
+			  Koleksi konten spesial langka termasuk "Bardock: Father of Goku", "The History of Trunks", dan OVA crossover dengan One Piece! Kisah sampingan yang memperkaya lore Dragon Ball.
+			</p>
+		  </div>
+		</div>
+
+		<!-- Dragon Ball Live Action Card -->
+		<div class="card">
+		  <div class="card-image" style="background-image: url('./images/db-live.jpg');"></div>
+		  <div class="card-badge">Subtitled</div>
+		  <div class="card-hover-content">
+			<h3 class="card-title">Dragon Ball Live Action</h3>
+			<div class="card-rating">
+			  <span class="card-rating-stars">★★☆☆☆</span>
+			  <span>2.3 (3K)</span>
+			</div>
+			<div class="card-meta">
+			  <span>3 Cult Movies</span>
+			  <span>1990-2009</span>
+			</div>
+			<p class="card-description">
+			  Koleksi kontroversial adaptasi live-action "Dragon Ball: Ssawora", "Dragon Ball: The Magic Begins", dan "Dragonball Evolution". Untuk fans yang penasaran atau kolektor hardcore!
+			</p>
+		  </div>
+		</div>
+
+		<!-- Ultimate Dragon Ball Comics Card -->
+		<div class="card">
+		  <div class="card-image" style="background-image: url('./images/db-comics.jpg');"></div>
+		  <div class="card-badge">Complete Collection</div>
+		  <div class="card-hover-content">
+			<h3 class="card-title">Komik Dragon Ball</h3>
+			<div class="card-rating">
+			  <span class="card-rating-stars">★★★★☆</span>
+			  <span>4.6 (68K)</span>
+			</div>
+			<div class="card-meta">
+			  <span>42 Vol Official + 4 Fan Series</span>
+			  <span>1984-Present</span>
+			</div>
+			<p class="card-description">
+			  <span style="color:#FFD700">Official:</span> Manga masterpiece Akira Toriyama dari awal sampai Super. 
+			  <span style="color:#FFD700">Fan Works:</span> AF (SSJ5 legendaris), Multiverse (100+ universe), 
+			  Sai (what-if epik), dan Zero (prequel misterius). Koleksi definitif untuk hardcore fans!
+			</p>
+		  </div>
+		</div>
+
+		<!-- Dragon Ball Soundtrack Card -->
+		<div class="card">
+		  <div class="card-image" style="background-image: url('./images/db-music.jpg');"></div>
+		  <div class="card-badge">Music Collection</div>
+		  <div class="card-hover-content">
+			<h3 class="card-title">Musik & Soundtrack</h3>
+			<div class="card-rating">
+			  <span class="card-rating-stars">★★★★★</span>
+			  <span>4.8 (25K)</span>
+			</div>
+			<div class="card-meta">
+			  <span>100+ Tracks</span>
+			  <span>1986-Present</span>
+			</div>
+			<p class="card-description">
+			  Kumpulan lagu ikonik dari Cha-La Head-Cha-La sampai Ultimate Battle. Termasuk BGM pertarungan, opening/ending semua series, dan OST film. Nostalgia dalam bentuk audio!
+			</p>
+		  </div>
+		</div>
+    
+        <button class="nav-arrow arrow-right" id="scrollRight">›</button>
+      </div>
+    </div>
+  </section>
+  <!-- FEATURE SECTION WITH CLEAN CARDS -->
+  <section class="comic-bg pb-16">
+    <div class="main-container">
+      <h2 class="font-saiyan text-3xl text-yellow-400 text-center mb-8"
+	      style="text-shadow: none; -webkit-text-stroke: 0.9px #000; color: #FFD700;">
+        KEUNGGULAN KOLEKSI KAMI
+      </h2>
+      
+      <div class="feature-cards">
+        <!-- Card 1 - Hybrid Image Format -->
+        <div class="feature-card">
+          <div class="character-circle">
+            <picture>
+              <source srcset="./images/frieza.webp" type="image/webp">
+              <source srcset="./images/frieza.mp4" type="video/mp4">
+              <img class="character-portrait" src="./images/frieza.jpg" alt="Frieza" loading="lazy">
+            </picture>
+          </div>
+          <h3 class="feature-title">LIFETIME ACCESS 🔄</h3>
+          <p class="feature-desc">Akses permanen ke seluruh konten Dragon Ball tanpa biaya berulang. Tonton kapan saja, selamanya.</p>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="feature-card">
+          <div class="character-circle">
+            <picture>
+              <source srcset="./images/cell.webp" type="image/webp">
+              <source srcset="./images/cell.mp4" type="video/mp4">			  
+              <img class="character-portrait" src="./images/cell.jpg" alt="Cell" loading="lazy">
+            </picture>
+          </div>
+          <h3 class="feature-title">KUALITAS HD 🌟</h3>
+          <p class="feature-desc">Streaming resolusi 1080p dengan audio jernih. Nikmati setiap detail animasi seperti baru dibuat.</p>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="feature-card">
+          <div class="character-circle">
+            <picture>
+              <source srcset="./images/broly.webp" type="image/webp">
+              <img class="character-portrait" src="./images/broly.jpg" alt="Broly" loading="lazy">
+            </picture>
+          </div>
+          <h3 class="feature-title">KONTEN EKSKLUSIF 🔐</h3>
+          <p class="feature-desc">Materi langka termasuk OVA, behind-the-scenes, dan wawancara eksklusif dengan staf produksi.</p>
+        </div>
+        
+        <!-- Card 4 -->
+        <div class="feature-card">
+          <div class="character-circle">
+            <picture>
+              <source srcset="./images/zamasu.webp" type="image/webp">
+              <img class="character-portrait" src="./images/zamasu.jpg" alt="Zamasu" loading="lazy">
+            </picture>
+          </div>
+          <h3 class="feature-title">BONUS SOUNDTRACK 🎵</h3>
+          <p class="feature-desc">Koleksi lengkap musik ikonik dari seluruh seri Dragon Ball dalam format digital berkualitas tinggi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+	<section class="comic-bg py-16">
+	  <div class="main-container">
+		<!-- WRAPPER PUTIH -->
+		<div class="bg-white rounded-2xl p-8 shadow-lg">
+
+		  <!-- === BONUS GAME === -->
+		  <div class="flex flex-col md:flex-row items-center gap-8 mb-16">
+			<!-- Video -->
+			<div class="w-full md:w-1/2 overflow-hidden rounded-xl">
+			  <video class="w-full h-auto" autoplay loop muted playsinline>
+				<source src="./images/dbz-gameplay.webm" type="video/webm">
+			  </video>
+			</div>
+
+			<!-- Teks -->
+			<div class="w-full md:w-1/2 space-y-4">
+			  <h3 class="text-3xl text-gray-800 font-helvetica">🎮 BONUS GAME DBZ!</h3>
+			  <p class="text-gray-800">
+				Dapatkan <span class="text-red-600 font-bold">Dragon Ball Z: Legacy</span> 
+				<span class="bg-red-600 text-white px-2 py-1 rounded-md text-sm ml-2">TERBATAS</span>
+			  </p>
+				<ul class="list-disc pl-5 space-y-2 text-gray-800 font-medium">
+				  <li>Versi lengkap game premium <span class="text-emerald-600">(tanpa iklan/in-app purchase)</span></li>
+				  <li>Karakter eksklusif: <span class="text-red-600 font-bold">SSJ4 Gogeta</span> + 5 hidden fighters</li>
+				  <li>Support perangkat: <span class="text-blue-600">Android 10+ / iOS 15+</span></li>
+				</ul>
+			  <div class="bg-gray-100 p-3 rounded-lg mt-4">
+				<p class="text-red-600 font-bold flex items-center gap-2">
+				  ⚠️ <span>Hanya 30/100 slot tersedia!</span>
+				</p>
+			  </div>
+			</div>
+		  </div>
+
+		  <!-- === CTA VEGETA === -->
+		  <div class="relative flex justify-center items-center mb-10">
+			<!-- Gambar Vegeta -->
+			<img src="./images/vegeta.png" alt="Vegeta" class="w-[800px] relative z-20" />
+		  </div>
+
+<div class="flex flex-col md:flex-row items-center justify-center gap-4 my-8 px-4 w-full">
+  
+  <!-- Kotak Koleksi Dragon Ball (Hanya modifikasi teks dan posisi icon) -->
+  <div class="w-full md:flex-1 md:max-w-md">
+    <div class="bg-gray-800 bg-opacity-80 backdrop-blur-sm p-6 rounded-xl shadow-2xl text-center h-full">
+      <p class="text-yellow-300 font-poppins-sb font-semibold text-lg md:text-xl leading-tight mb-2">
+        KOLEKSI DRAGON BALL TERLENGKAP<br>
+        <span class="text-yellow-300">SE-INDONESIA!🔥🔥🔥</span>
+      </p>
+      <p class="text-gray-100 text-sm md:text-base mb-4">
+        Akses Seumur Hidup Semua Series,<br>
+        Movie, OVA dan Komiknya!<br>
+        Jangan Sampai Kehabisan Slot Promonya!
+      </p>
+      <a href="#link-checkout-mu" class="neon-penawaran-button inline-flex items-center py-3 px-6 text-sm sm:text-base">
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 300.005 300.005">
+          <path d="M149.354,146.641c-4.298,0-7.781,3.483-7.781,7.781v54.541c0,4.298,3.483,7.781,7.781,7.781 c4.295,0,7.781-3.483,7.781-7.781v-54.541C157.135,150.124,153.648,146.641,149.354,146.641z"/>
+          <path d="M111.7,146.641c-4.298,0-7.781,3.483-7.781,7.781v54.541c0,4.298,3.483,7.781,7.781,7.781 c4.298,0,7.781-3.483,7.781-7.781v-54.541C119.481,150.124,115.997,146.641,111.7,146.641z"/>
+          <path d="M187.005,146.641c-4.3,0-7.781,3.483-7.781,7.781v54.541c0,4.298,3.481,7.781,7.781,7.781 c4.295,0,7.781-3.483,7.781-7.781v-54.541C194.786,150.124,191.301,146.641,187.005,146.641z"/>
+          <path d="M150,0C67.159,0,0.002,67.162,0.002,150S67.159,300.005,150,300.005S300.003,232.841,300.003,150S232.841,0,150,0z M231.341,153.208l-11.495,67.961c0,6.634-5.379,12.014-12.016,12.014H90.875c-6.634,0-12.014-5.379-12.014-12.014 l-11.495-67.961c-4.451-3.582-7.358-9.005-7.358-15.157c0-10.312,8.001-18.736,18.127-19.452l33.087-48.389 c2.425-3.545,7.262-4.458,10.815-2.031c3.548,2.428,4.456,7.267,2.031,10.815l-27.031,39.535h104.64l-27.036-39.535 c-2.428-3.548-1.52-8.388,2.031-10.815c3.545-2.425,8.388-1.512,10.815,2.031l33.09,48.389 c10.12,0.718,18.119,9.143,18.119,19.452C238.697,144.206,235.789,149.627,231.341,153.208z"/>
+        </svg>
+        <span>KLAIM HARGA PROMO!</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Kotak Timer Promo (Tidak diubah sama sekali) -->
+  <div class="w-full md:w-auto">
+    <div class="promo-timer-section-wrapper" style="padding-top: 30px; padding-bottom: 50px;">
+      <div class="h-full flex flex-col items-center justify-center">
+        <p class="promo-timer-text-line">⏰ PROMO BERAKHIR DALAM:</p>
+        <div class="flipdown-wrapper">
+          <div id="flipdown" class="flipdown"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<section class="testimonials-section">
+            <h2 class="testimonials-title">Testimonial</h2>
+            <div class="testimonials-container space-y-8"> <div class="testimonial-manga-3frame">
+                <img src="./images/member_icon_52.png" alt="Avatar Rizky" class="testimonial-avatar-manga">
+                <div class="testimonial-bubble-3frame">
+                  <div class="bubble-frame-top">
+                    <div class="bubble-content-wrapper-top"> 
+                      <p class="testimonial-buyer-name">Rizky Maulana</p> <p class="testimonial-text-content">"Gak nyangka bisa dapet koleksi lengkap Dragon Ball sampai yang paling langka! Dari DB klasik sampai Super semua ada dengan subtitle Indonesia. Yang bikin puas bisa nonton tanpa buffer dan tanpa iklan!"</p>
+					  <p class="testimonial-timestamp">26.05.2025,  08:15</p> 
+                    </div>
+                  </div> 
+                  <div class="bubble-frame-bottom"></div> 
+                </div>
+              </div> <div class="testimonial-manga-3frame">
+                <img src="./images/member_icon_55.png" alt="Avatar Budi" class="testimonial-avatar-manga"> 
+                <div class="testimonial-bubble-3frame">
+                  <div class="bubble-frame-top">
+                    <div class="bubble-content-wrapper-top">
+                      <p class="testimonial-buyer-name">Budi Santoso</p>
+                      <p class="testimonial-text-content">"Awalnya ragu beli paket digital, tapi ternyata keputusan terbaik! Sekarang saya bisa nonton Dragon Ball bareng anak-anak dengan kualitas HD. Mereka seneng banget bisa lihat petualangan Goku dari kecil sampai jadi Super Saiyan!"</p>
+                      <p class="testimonial-timestamp">25.05.2025,  19:30</p> 
+                    </div>
+                  </div> 
+                  <div class="bubble-frame-bottom"></div> 
+                </div>
+              </div> <div class="testimonial-manga-3frame">
+                <img src="./images/member_icon_53.png" alt="Avatar Dewa" class="testimonial-avatar-manga"> 
+                <div class="testimonial-bubble-3frame">
+                  <div class="bubble-frame-top">
+                    <div class="bubble-content-wrapper-top">
+                      <p class="testimonial-buyer-name">Dewa Kresna</p>
+                      <p class="testimonial-text-content">"BROOOO!!! GUE SAMPAI NANGIS LIHAT KOLEKSINYA LENGKAP BANGET! Dari Dragon Ball 1986 sampe Super Hero 2022 ADA SEMUA! Bonus game-nya juga mantep!!! Ini worth banget untuk harganya!"</p>
+                      <p class="testimonial-timestamp">24.05.2025,  11:55</p> 
+        </div>
+        </div>
+		<div class="bubble-frame-bottom"></div> 
+     </section> <div class="main-container">
+    <div class="view-more-overlay-inside">
+      <a href="#" class="view-more-button-nembus">LIHAT LEBIH BANYAK (62 KOMENTAR)</a>
+    </div>
+  </div>
+</section>
+	  </div>
+</body>
+  <link rel="preload" href="./images/frieza.webp" as="image">
+  <link rel="preload" href="./images/cell.webp" as="image"> 
+<script src="https://cdn.jsdelivr.net/npm/flipdown@0.3.2/dist/flipdown.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // ---------------------------------------------------------------------------
+  // BAGIAN 1: PENGATURAN WAKTU TARGET (Digunakan oleh kedua timer)
+  // ---------------------------------------------------------------------------
+  let targetTimeUnix;
+  const promoDurationSeconds = 10 * 60 * 60; // 10 jam
+  const storedTargetTime = localStorage.getItem('promoTargetTimeUnix');
+  const nowUnix = Math.floor(Date.now() / 1000);
+
+  if (storedTargetTime && parseInt(storedTargetTime) > nowUnix) {
+    targetTimeUnix = parseInt(storedTargetTime);
+  } else {
+    targetTimeUnix = nowUnix + promoDurationSeconds;
+    localStorage.setItem('promoTargetTimeUnix', targetTimeUnix);
+  }
+
+  // ---------------------------------------------------------------------------
+  // BAGIAN 2: INISIALISASI DAN LOGIKA UNTUK TIMER TEKS DI HEADER
+  // ---------------------------------------------------------------------------
+  const headerTimerEl = document.getElementById("promo-header-timer"); // ID dari HTML-mu (source 152)
+  let headerIntervalId;
+
+  if (headerTimerEl) {
+    // Pastikan targetUnix valid sebelum digunakan untuk header timer
+    const currentTargetUnixForHeader = parseInt(localStorage.getItem('promoTargetTimeUnix')); // Ambil lagi untuk kepastian
+    if (currentTargetUnixForHeader && !isNaN(currentTargetUnixForHeader)) {
+        
+        function updateHeaderTimer() {
+            const now = Math.floor(Date.now() / 1000);
+            let sisa = currentTargetUnixForHeader - now;
+
+            if (sisa <= 0) {
+                headerTimerEl.textContent = "HABIS!";
+                if (headerIntervalId) {
+                    clearInterval(headerIntervalId);
+                }
+                return;
+            }
+
+            const jam = String(Math.floor(sisa / 3600)).padStart(2, "0");
+            const menit = String(Math.floor((sisa % 3600) / 60)).padStart(2, "0");
+            const detik = String(sisa % 60).padStart(2, "0");
+
+            // Menggunakan backtick (`) untuk template literal
+            headerTimerEl.textContent = `${jam}:${menit}:${detik}`;
+        }
+
+        const nowForInitialCheckHeader = Math.floor(Date.now() / 1000);
+        if (currentTargetUnixForHeader > nowForInitialCheckHeader) {
+            updateHeaderTimer();
+            headerIntervalId = setInterval(updateHeaderTimer, 1000);
+        } else {
+            headerTimerEl.textContent = "HABIS!";
+        }
+    } else {
+        if(headerTimerEl) headerTimerEl.textContent = "Error";
+        // console.error("Header timer: targetUnix dari localStorage tidak valid atau tidak ditemukan saat init header.");
+    }
+  }
+
+
+  // ---------------------------------------------------------------------------
+  // BAGIAN 3: INISIALISASI DAN LOGIKA UNTUK FLIPDOWN TIMER UTAMA (di bawah)
+  // ---------------------------------------------------------------------------
+  const mainFlipdownContainer = document.getElementById("flipdown"); // (source 187)
+  let mainFlipdownInstance;
+
+  if (mainFlipdownContainer && targetTimeUnix && !isNaN(targetTimeUnix)) { // Pastikan targetTimeUnix valid
+    mainFlipdownInstance = new FlipDown(targetTimeUnix, {
+      theme: "light"
+    })
+      .start()
+      .ifEnded(() => {
+        if (mainFlipdownContainer) {
+          mainFlipdownContainer.innerHTML =
+            '<p class="text-red-600 font-bold text-center py-4">PROMO TELAH BERAKHIR!</p>';
+        }
+        localStorage.removeItem('promoTargetTimeUnix');
+        
+        // Update juga timer teks di header saat FlipDown utama berakhir
+        if (headerTimerEl) {
+          headerTimerEl.textContent = "HABIS!";
+        }
+        if (headerIntervalId) { // Hentikan interval timer header
+          clearInterval(headerIntervalId);
+        }
+      });
+
+    // Fungsi set label dan removeDividerDots untuk FlipDown UTAMA
+    const setLabels = () => {
+      if (!mainFlipdownContainer) return;
+      const groups = document.querySelectorAll('#flipdown .rotor-group');
+      if (groups.length >= 4) {
+        if(groups[1]) groups[1].setAttribute('data-label', 'Jam');
+        if(groups[2]) groups[2].setAttribute('data-label', 'Menit');
+        if(groups[3]) groups[3].setAttribute('data-label', 'Detik');
+      } else {
+        // console.warn("Main FlipDown groups not fully loaded for labels.");
+      }
+    };
+
+    const removeDividerDots = () => {
+      if (!mainFlipdownContainer) return;
+      const dividers = document.querySelectorAll('#flipdown .rotor-group-divider');
+      dividers.forEach(div => {
+        div.textContent = '';
+        div.style.display = 'none';
+      });
+    };
+
+    setTimeout(() => {
+      setLabels();
+      removeDividerDots();
+    }, 250); // Delay untuk memastikan DOM FlipDown siap
+  }
+
+
+  // ---------------------------------------------------------------------------
+  // BAGIAN 4: SCRIPT LAIN DARI FILE-MU (Card Scroller, Tombol View More)
+  // ---------------------------------------------------------------------------
+
+  // Script untuk horizontal scroll cards (source 199)
+  const cardsContainer = document.getElementById('cardsContainer');
+  if (cardsContainer) {
+    const scrollLeftBtn = document.getElementById('scrollLeft');
+    const scrollRightBtn = document.getElementById('scrollRight');
+    const firstCard = cardsContainer.querySelector('.card');
+    const cardStyle = firstCard ? window.getComputedStyle(firstCard) : null;
+    const cardMarginRight = cardStyle ? parseInt(cardStyle.marginRight) || 0 : 0; // Jika ada margin kanan
+    const cardGap = 20; // Sesuai 'gap: 20px;' pada .cards-container
+    // Lebar kartu aktual + gap/margin. Fallback ke 280.
+    const cardWidth = firstCard ? firstCard.offsetWidth + cardGap : 280; 
+    const scrollAmount = cardWidth * 2;
+
+    function updateArrows() {
+      if (!cardsContainer || !scrollLeftBtn || !scrollRightBtn) return;
+      scrollLeftBtn.style.display = cardsContainer.scrollLeft <= 10 ? 'none' : 'flex';
+      scrollRightBtn.style.display =
+        cardsContainer.scrollLeft + cardsContainer.clientWidth >= cardsContainer.scrollWidth - 10 ?
+        'none' : 'flex';
+    }
+
+    if (scrollLeftBtn && scrollRightBtn) {
+      scrollLeftBtn.addEventListener('click', () => {
+        cardsContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+      scrollRightBtn.addEventListener('click', () => {
+        cardsContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+    }
+    cardsContainer.addEventListener('scroll', updateArrows);
+    window.addEventListener('resize', updateArrows);
+    updateArrows();
+  }
+
+  // Script untuk tombol "LIHAT LEBIH BANYAK" (source 227)
+  const viewMoreButton = document.querySelector('.view-more-button-nembus');
+  if (viewMoreButton) {
+    viewMoreButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      this.blur();
+    });
+  }
+
+});
+</script>
+
+</body>
+</html>
