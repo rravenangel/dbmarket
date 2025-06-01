@@ -2,40 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="color-scheme" content="light">
-  <title>Dragon Ball Ultimate Collection</title>
+  <meta name="description" content="Koleksi Lengkap Dragon Ball Series - Anime, Movie, OVA, Komik & Soundtrack. Akses Seumur Hidup!">
+  <meta name="keywords" content="dragon ball, anime, dbz, goku, vegeta, koleksi lengkap">
+  
+  <title>Dragon Ball Ultimate Collection | Lifetime Access</title>
+  
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preload" href="./images/SaiyanSansRegular.ttf" as="font" type="font/truetype" crossorigin>
+  <link rel="preload" href="./images/bg-video.webm" as="video" type="video/webm">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flipdown@0.3.2/dist/flipdown.min.css">
 <style>
   html {
     color-scheme: light;
   }
-  /* FONT FACES */
   @font-face {
     font-family: 'Saiyan Sans';
     src: url('./images/SaiyanSansRegular.ttf') format('truetype');
+    font-display: swap;
   }
   @font-face {
     font-family: 'Poppins';
     src: url('./images/Poppins-SemiBold.ttf') format('truetype');
     font-weight: 600;
+    font-display: swap;
   }
   @font-face {
     font-family: 'Helvetica';
     src: url('./images/HelveticaNeueHeavy.ttf') format('truetype');
+    font-display: swap;
   }
   @font-face {
     font-family: 'NotoSansJP';
     src: url('./images/NotoSansJP.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
   }
   .font-helvetica-custom {
     font-family: Helvetica, Arial, sans-serif;
   }
 
-  /* GLOBAL STYLES */
   body {
     background-color: #0f172a;
     font-family: 'Helvetica', sans-serif;
@@ -52,7 +64,6 @@
     font-weight: 600;
   }
 
-  /* MAIN CONTAINER */
   .main-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -60,7 +71,6 @@
     width: 100%;
   }
 
-  /* HERO SECTION (Tinggi Dibuat Responsif) */
   .hero-section {
     height: 60vh;
     min-height: 400px;
@@ -68,13 +78,13 @@
     background: #000;
     overflow: hidden;
   }
-  @media (min-width: 768px) { /* md breakpoint Tailwind */
+  @media (min-width: 768px) {
     .hero-section {
       height: 45vh;
       min-height: 350px;
     }
   }
-  @media (min-width: 1024px) { /* lg breakpoint Tailwind */
+  @media (min-width: 1024px) {
     .hero-section {
       height: 60vh;
       min-height: 400px;
@@ -274,113 +284,462 @@
   .mobile-break-h2 { display: none; }
   @media (max-width: 639.98px) { .mobile-break-h2 { display: block; } }
 
-  .break-very-narrow-phone { /* Untuk <br> di list item bonus game, aktif HANYA di phone yang SANGAT SEMPIT */
-    display: none; 
+  .break-very-narrow-phone { display: none; }
+  @media (max-width: 499.98px) { .break-very-narrow-phone { display: block; } }
+
+  .bonus-game-text-column .dapatkan-phone-narrow,
+  .bonus-game-text-column .dapatkan-tablet-desktop,
+  .bonus-game-text-column .bonus-game-list,
+  .bonus-game-text-column .bonus-game-slot-text > p { line-height: 1.5; }
+  .bonus-game-text-column .dapatkan-phone-narrow,
+  .bonus-game-text-column .bonus-game-list,
+  .bonus-game-text-column .slot-phone-narrow { font-size: 0.875rem; } 
+  .bonus-game-text-column .slot-phone-narrow { font-size: 0.75rem; } 
+  .bonus-game-text-column .dapatkan-tablet-desktop { display: none; } 
+  .bonus-game-text-column .slot-tablet-desktop { display: none; } 
+  @media (min-width: 500px) {
+    .bonus-game-text-column .dapatkan-phone-narrow { display: none; }
+    .bonus-game-text-column .dapatkan-tablet-desktop { display: block; font-size: 1rem; } 
+    .bonus-game-text-column .bonus-game-list { font-size: 1rem; } 
+    .bonus-game-text-column .slot-phone-narrow { display: none; }
+    .bonus-game-text-column .slot-tablet-desktop { display: inline; font-size: 0.875rem; } 
   }
-  @media (max-width: 499.98px) { /* Aktifkan <br> HANYA untuk layar di bawah 500px */
-    .break-very-narrow-phone {
-      display: block;
-    }
+  @media (min-width: 768px) { 
+    .bonus-game-text-column .dapatkan-tablet-desktop,
+    .bonus-game-text-column .bonus-game-list,
+    .bonus-game-text-column .slot-tablet-desktop { font-size: 1.125rem; } 
+  }
+  @media (min-width: 1024px) { 
+    .bonus-game-text-column .dapatkan-tablet-desktop,
+    .bonus-game-text-column .bonus-game-list,
+    .bonus-game-text-column .slot-tablet-desktop { font-size: 1.25rem; } 
   }
 
-  /* STYLING UNTUK BAGIAN BONUS GAME TEXT (FONT SIZE) */
-  .bonus-game-text-column p,
-  .bonus-game-text-column ul,
-  .bonus-game-text-column .bg-gray-100 p { /* Base font size untuk phone sangat sempit (<500px) */
-    font-size: 0.875rem; /* text-sm */
-    line-height: 1.5;
-  }
-  .bonus-game-text-column .bg-gray-100 p { /* Slot text di phone sempit */
-    font-size: 0.75rem; /* text-xs */
-  }
-
-  @media (min-width: 500px) { /* Untuk phone besar / tablet kecil seperti Advan V8 (500px hingga <md 768px) */
-    .bonus-game-text-column p,
-    .bonus-game-text-column ul,
-    .bonus-game-text-column .bg-gray-100 p {
-      font-size: 1rem; /* text-base */
-    }
-    .bonus-game-text-column .bg-gray-100 p { /* Slot text */
-      font-size: 0.875rem; /* text-sm */
-    }
-  }
-  @media (min-width: 768px) { /* Untuk tablet standar (md hingga <lg 1024px) */
-    .bonus-game-text-column p,
-    .bonus-game-text-column ul,
-    .bonus-game-text-column .bg-gray-100 p {
-      font-size: 1.125rem; /* text-lg */
-    }
-    .bonus-game-text-column .bg-gray-100 p { /* Slot text */
-      font-size: 1rem; /* text-base */
-    }
-  }
-  @media (min-width: 1024px) { /* Untuk desktop (lg ke atas) */
-    .bonus-game-text-column p,
-    .bonus-game-text-column ul,
-    .bonus-game-text-column .bg-gray-100 p {
-      font-size: 1.125rem; /* text-lg, bisa disamakan dengan tablet atau dibesarkan lagi jika perlu (misal text-xl) */
-                            /* Di HTML Anda sudah ada lg:text-xl, jadi ini mungkin akan tertimpa oleh Tailwind */
-                            /* Agar tidak tertimpa, selector CSS ini harus lebih spesifik atau menggunakan !important,
-                               atau hapus kelas font size dari HTML untuk elemen ini dan kontrol sepenuhnya via CSS ini.
-                               Untuk saat ini, biarkan Tailwind yang menangani via kelas di HTML jika ada. */
-    }
-    /* Jika kelas Tailwind lg:text-xl ada di HTML untuk p dan ul, maka CSS ini tidak akan efektif untuk lg,
-       kecuali selector CSS di sini lebih spesifik atau pakai !important.
-       Saya akan biarkan seperti ini, dan kelas Tailwind di HTML akan menentukan font size final untuk lg.
-    */
-  }
-
-
-  /* FLIPDOWN TIMER STYLES */
+  /* PROMO TIMER */
   .promo-timer-section-wrapper { display: flex; flex-direction: column; align-items: center; padding: 20px 30px 45px 30px; background: linear-gradient(135deg, #8B0000, #FF0000); border: 2px solid #FFD700; box-shadow: 0 0 15px rgba(255,0,0,0.5); border-radius: 12px; margin: 20px auto; max-width: fit-content; animation: pulse 2s infinite; }
   .promo-timer-text-line { color: #fff; font-size: 1.25rem; margin-bottom: 1rem; font-weight: bold; white-space: nowrap; }
-  .flipdown { display: flex !important; justify-content: center !important; align-items: center !important; gap: 15px !important; padding: 0 !important; margin: 0 auto !important; height: auto !important; width: fit-content !important; flex-wrap: nowrap !important; }
+  .flipdown { display: flex !important; justify-content: center !important; align-items: center !important; gap: 10px !important; padding: 0 !important; margin: 0 auto !important; height: auto !important; width: fit-content !important; flex-wrap: nowrap !important; }
   .flipdown-wrapper { display: flex !important; justify-content: center !important; align-items: flex-start !important; padding: 0 !important; margin: 0 !important; width: auto !important; height: auto !important; overflow: visible !important; }
   .flipdown .rotor-group { position: relative !important; margin: 0 !important; padding: 0 !important; display: flex !important; flex-direction: row !important; align-items: center !important; flex-shrink: 0; width: auto !important; height: auto !important; }
   .flipdown .rotor-group-heading { display: none !important; }
-  .flipdown .rotor-group:after { content: attr(data-label) !important; position: absolute !important; bottom: -28px !important; left: 50% !important; transform: translateX(-50%) !important; font-size: 13px !important; color: #fff !important; font-weight: bold !important; line-height: 1 !important; white-space: nowrap !important; text-transform: uppercase; background-color: transparent !important; width: auto !important; height: auto !important; border-radius: 0 !important; }
+  .flipdown .rotor-group:after { content: attr(data-label) !important; position: absolute !important; bottom: -28px !important; left: 50% !important; transform: translateX(-50%) !important; font-size: 12px !important; color: #fff !important; font-weight: bold !important; line-height: 1 !important; white-space: nowrap !important; text-transform: uppercase; background-color: transparent !important; width: auto !important; height: auto !important; border-radius: 0 !important; }
   .flipdown .rotor-group-divider { display: none !important; }
-  .flipdown .rotor { vertical-align: middle !important; display: block !important; margin: 0 !important; padding: 0 !important; }
+  .flipdown .rotor { vertical-align: middle !important; display: block !important; margin: 0 2px !important; padding: 0 !important; }
   .flipdown .rotor-top, .flipdown .rotor-bottom, .flipdown .rotor-leaf, .flipdown .rotor-leaf-top, .flipdown .rotor-leaf-bottom { display: block !important; width: 100% !important; box-sizing: border-box !important; }
   .flipdown .rotor-group:nth-child(1) { display: none !important; }
   #flipdown .rotor-group:nth-child(n+5) { display: none !important; }
   .flipdown.flipdown__theme-light .rotor-group:nth-child(n+2):nth-child(-n+3)::before, .flipdown.flipdown__theme-light .rotor-group:nth-child(n+2):nth-child(-n+3)::after { background-color: transparent !important; }
   .flipdown .rotor-group:nth-child(n+2):nth-child(-n+3)::after { width: auto !important; height: auto !important; border-radius: 0 !important; }
-
-  /* CTA BUTTON */
+  @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+  
+  /* CTA BUTTONS */
   .cta-dragonball { background: linear-gradient(to right, #FF0000, #FF8C00); box-shadow: 0 0 20px rgba(255,215,0,0.8); transition: all 0.3s ease; color: white; font-size: 1.125rem; padding: 0.75rem 2rem; border-radius: 9999px; font-weight: bold; display: inline-block; }
   .cta-dragonball:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,215,0,1); }
-  .promo-timer { background: linear-gradient(135deg, #8B0000, #FF0000); border: 2px solid #FFD700; box-shadow: 0 0 15px rgba(255,0,0,0.5); animation: pulse 2s infinite; }
-  @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
-
-  /* STYLING TESTIMONI */
-  .testimonials-section { margin-top: 40px; padding-top: 30px; border-top: 1px solid #e5e7eb; }
-  .testimonials-title { font-family: 'Helvetica', sans-serif; font-size: 24px; color: #000; text-align: left; margin-bottom: 30px; }
-  .testimonial-manga-3frame{display:flex;align-items:flex-start;margin-bottom:30px;max-width:100%}
-  .testimonial-avatar-manga{width:100px;height:100px;border-radius:0;margin-top:23px;margin-right:-18px;flex-shrink:0;border:5px solid #000;object-fit:cover}
-  .testimonial-bubble-3frame{position:relative;flex-grow:1;display:flex;flex-direction:column;min-height:216px}
-  .bubble-frame-top{background-image:url(./images/frame_01.png);background-repeat:no-repeat;background-size:100% 100%;height:177px;width:100%;position:relative;display:flex;flex-direction:column;box-sizing:border-box;z-index:1}
-  .bubble-content-wrapper-top{padding:45px 25px 15px 55px;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;height:100%;box-sizing:border-box}
-  .testimonial-buyer-name{font-family:'NotoSansJP',sans-serif;font-size:20px;font-weight:700;color:#000;margin-bottom:8px;line-height:1.3;-webkit-text-stroke-width:.3px;margin-left:10px}
-  .testimonial-text-content{font-family:'NotoSansJP',sans-serif;font-size:16px;color:#333;line-height:1.5;margin-top:0;margin-left:10px;flex-grow:1;overflow-wrap:break-word;word-wrap:break-word}
-  .bubble-frame-middle{display:none!important;height:0!important;padding:0!important;margin:0!important;border:none!important}
-  .bubble-frame-bottom{background-image:url(./images/frame_03.png);background-repeat:no-repeat;background-size:100% 100%;height:39px;width:100%;z-index:1}
-  .testimonial-timestamp{font-family:'NotoSansJP',sans-serif;font-size:16px;color:#999;width:100%;text-align:left;margin-left:10px;margin-bottom:-20px}
-
-  /* VIEW MORE BUTTON */
-  .view-more-overlay-inside { position: relative; width: 100vw; left: 50%; transform: translateX(-50%); max-width: 1150px; height: 150px; background-color: rgba(255,255,255,0.7); border-radius: 0px 0px 0 0; display: flex; justify-content: center; align-items: center; margin: -120px 0 30px; padding: 10px 20px; box-sizing: border-box; z-index: 10; }
-  .view-more-button-nembus { display: inline-block; background-color: #fff; border: 3px solid #000; padding: 12px 24px; border-radius: 0px; font-family: 'NotoSansJP',sans-serif; font-size: 16px; font-weight: bold; color: #222; margin-top: 80px; text-decoration: none; transition: all .2s ease-in-out; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-  .view-more-button-nembus:hover, .view-more-button-nembus:active, .view-more-button-nembus:focus { background-color: #000 !important; color: #fff !important; border-color: #000 !important; outline: none; }
-
-  /* NEON BUTTONS */
   .neon-db-button { display: inline-flex; align-items: center; justify-content: flex-start; padding-top: 14px; padding-bottom: 14px; padding-left: 16px; padding-right: 24px; font-family: 'Poppins',sans-serif; font-size: 1.1rem; font-weight: bold; color: #FFF; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; background-color: #0D1B3E; border: 2px solid #FFD700; border-radius: 50px; box-shadow: 0 0 3px #FFD700,0 0 8px #FFD700,0 0 15px #FFEA00,0 0 25px #FFAB00,inset 0 0 3px rgba(255,220,77,.5); transition: all .3s cubic-bezier(.25,.8,.25,1); position: relative; cursor: pointer; outline: none; }
   .neon-db-button:hover, .neon-db-button:focus { color: #FFF; border-color: #FFFACD; background-color: #1A2C5B; box-shadow: 0 0 5px #FFFACD,0 0 12px #FFFACD,0 0 25px #FFEA00,0 0 45px #FFAB00,inset 0 0 6px rgba(255,250,205,.7); transform: translateY(-2px); }
   .neon-db-button:active { transform: translateY(0px); box-shadow: 0 0 2px #FFFACD,0 0 5px #FFFACD,0 0 10px #FFEA00,0 0 18px #FFAB00,inset 0 0 2px rgba(255,250,205,.5); }
   .neon-db-button span { position: relative; z-index: 1; }
-  .neon-penawaran-button { display: inline-flex; align-items: center; justify-content: flex-start; padding: 10px 20px; font-size: .95rem; font-family: 'Poppins',sans-serif; font-weight: bold; color: #FFF; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; background-color: #0D1B3E; border: 2px solid #FFD700; border-radius: 50px; box-shadow: 0 0 3px #FFD700,0 0 8px #FFD700,0 0 15px #FFEA00,0 0 25px #FFAB00,inset 0 0 3px rgba(255,220,77,.5); transition: all .3s cubic-bezier(.25,.8,.25,1); position: relative; cursor: pointer; outline: none; }
+  .neon-penawaran-button { display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: .95rem; font-family: 'Poppins',sans-serif; font-weight: bold; color: #FFF; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; background-color: #0D1B3E; border: 2px solid #FFD700; border-radius: 50px; box-shadow: 0 0 3px #FFD700,0 0 8px #FFD700,0 0 15px #FFEA00,0 0 25px #FFAB00,inset 0 0 3px rgba(255,220,77,.5); transition: all .3s cubic-bezier(.25,.8,.25,1); position: relative; cursor: pointer; outline: none; }
   .neon-penawaran-button:hover, .neon-penawaran-button:focus { color: #FFF; border-color: #FFFACD; background-color: #1A2C5B; box-shadow: 0 0 5px #FFFACD,0 0 12px #FFFACD,0 0 25px #FFEA00,0 0 45px #FFAB00,inset 0 0 6px rgba(255,250,205,.7); transform: translateY(-2px); }
   .neon-penawaran-button:active { transform: translateY(0px); box-shadow: 0 0 2px #FFFACD,0 0 5px #FFFACD,0 0 10px #FFEA00,0 0 18px #FFAB00,inset 0 0 2px rgba(255,250,205,.5); }
   .neon-penawaran-button span { position: relative; z-index: 1; }
+
+  /* === TESTIMONIALS SECTION STYLING === */
+  .testimonials-section { margin-top: 40px; padding-top: 30px; border-top: 1px solid #e5e7eb; }
+  .testimonials-title { font-family: 'Helvetica', sans-serif; font-size: 24px; color: #000; text-align: left; margin-bottom: 30px; }
+  .testimonial-manga-3frame{ display:flex; align-items:flex-start; margin-bottom:30px; max-width:100%; }
+  
+  /* Default (Tablet & Desktop - md ke atas) - Menggunakan Frame Gambar Asli */
+  .testimonial-avatar-manga {
+    width: 100px; height: 100px; border-radius: 0;
+    margin-top: 23px; margin-right: -18px; 
+    flex-shrink: 0; border: 5px solid #000000;
+    object-fit: cover; z-index: 2; position: relative;
+    display: block; 
+  }
+  .testimonial-bubble-3frame {
+    position:relative; flex-grow:1; display:flex; flex-direction:column;
+    min-height:216px; 
+    margin-top: 0px; 
+    margin-left: 0px; 
+    background-color: transparent; 
+    border: none; padding: 0; 
+  }
+  .testimonial-bubble-3frame::before { display: none; }
+  .bubble-frame-top {
+    background-image:url(./images/frame_01.png); 
+    background-repeat:no-repeat; background-size:100% 100%;
+    height: 177px; 
+    width:100%; position:relative; display:flex; flex-direction:column;
+    box-sizing:border-box; z-index:1;
+  }
+  .bubble-frame-bottom {
+    background-image:url(./images/frame_03.png); 
+    background-repeat:no-repeat; background-size:100% 100%;
+    height: 39px; 
+    width:100%; z-index:1; position:relative;
+  }
+  .bubble-content-wrapper-top {
+    padding:45px 25px 15px 55px; 
+    flex-grow:1; display:flex; flex-direction:column; justify-content:space-between;
+    overflow:hidden; height:100%; box-sizing:border-box;
+  }
+  .testimonial-buyer-name {
+    font-family:'NotoSansJP',sans-serif; font-size:20px; font-weight:700; color:#000;
+    margin-bottom:8px; line-height:1.3; -webkit-text-stroke-width:.3px;
+    margin-left: 0px; margin-top: 0px; 
+  }
+  .testimonial-text-content {
+    font-family:'NotoSansJP',sans-serif; font-size:16px; color:#333;
+    line-height:1.5; margin-top:0; margin-left: 0px; 
+    flex-grow:1; overflow-wrap:break-word; word-wrap:break-word;
+  }
+  .testimonial-timestamp {
+    font-family:'NotoSansJP',sans-serif; font-size:16px; color:#999;
+    width:100%; text-align:left; margin-left: 0px; 
+    margin-top: 4px; margin-bottom:-20px; 
+  }
+  .bubble-frame-middle{display:none!important;}
+
+  /* PHONE VIEWS (< 768px) - Menggunakan Bubble CSS Murni & TANPA AVATAR */
+  @media (max-width: 767.98px) {
+    .testimonial-avatar-manga {
+      display: none; 
+    }
+    .testimonial-bubble-3frame {
+      background-color: #ffffff; 
+      border: 1px solid #cccccc; 
+      border-radius: 8px;       
+      padding: 15px; 
+      margin-left: 0;           
+      margin-top: 10px; 
+      min-height: auto;         
+      position: relative;
+    }
+    .bubble-frame-top,
+    .bubble-frame-bottom {
+      background-image: none !important; 
+      height: auto !important;           
+      border: none !important;  
+      min-height: 0 !important;  
+      padding: 0 !important;       
+    }
+    .bubble-content-wrapper-top {
+      padding: 0; 
+      justify-content: flex-start; 
+      height: auto;
+    }
+    .testimonial-buyer-name { font-size:14px; margin-bottom:4px; }
+    .testimonial-text-content { font-size:12px; line-height:1.4; margin-bottom: 5px; flex-grow:0;}
+    .testimonial-timestamp { font-size:11px; margin-bottom:0; margin-top:auto;}
+  }
+  
+  /* VIEW MORE BUTTON */
+  .view-more-overlay-inside { 
+    position: relative; 
+    width: 90%; max-width: 400px; 
+    left: auto; transform: none; 
+    height: auto; 
+    background-color: rgba(255, 255, 255, 0.85); 
+    border-radius: 8px; 
+    display: flex; 
+    justify-content: center; align-items: center; 
+    margin: -60px auto 30px auto; 
+    padding: 10px; 
+    box-sizing: border-box; z-index: 10; 
+  }
+  .view-more-button-nembus { 
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background-color: #ffffff; 
+    border: 2px solid #000000; 
+    padding: 10px 15px; 
+    border-radius: 6px; 
+    font-family: 'NotoSansJP', sans-serif; 
+    font-size: 14px; 
+    font-weight: bold; color: #222222; 
+    margin-top: 0; 
+    text-decoration: none; 
+    transition: all .2s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2); 
+    line-height: 1.3; 
+    text-align: center; 
+  }
+  .view-more-button-nembus span.comment-count {
+    font-size: 0.85em; font-weight: normal; color: #444; 
+    display: block; margin-top: 2px;
+  }
+  @media (min-width: 768px) { 
+    .view-more-overlay-inside {
+      width: 100vw; left: 50%; transform: translateX(-50%);
+      max-width: 1150px; height: 150px;    
+      background-color: rgba(255, 255, 255, 0.7); 
+      border-radius: 0px 0px 0 0; 
+      margin: -120px 0 30px; padding: 10px 20px;   
+    }
+    .view-more-button-nembus {
+      display: inline-block; flex-direction: row; 
+      border-width: 3px; padding: 12px 24px;
+      font-size: 16px; margin-top: 80px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      line-height: normal; 
+      text-align: left; 
+    }
+    .view-more-button-nembus span.comment-count {
+        font-size: inherit; font-weight: bold; color: inherit; 
+        display: inline; margin-top: 0; 
+    }
+  }
+  .view-more-button-nembus:hover, 
+  .view-more-button-nembus:active, 
+  .view-more-button-nembus:focus { 
+    background-color: #000000 !important; 
+    color: #ffffff !important;           
+    border-color: #000000 !important;   
+    outline: none; 
+  }
+
+/* ADDED: MOBILE TIMER TEXT COLOR MODIFICATION */
+@media (max-width: 767.98px) {
+  .promo-timer-section-wrapper {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    animation: none !important;
+    padding: 0 !important;
+    margin: 15px auto !important;
+  }
+
+  .promo-timer-text-line {
+    font-size: 1rem !important;
+    color: #000000 !important;
+    font-weight: bold;
+  }
+
+  .flipdown .rotor-group {
+    transform: scale(0.8);
+  }
+
+  .flipdown .rotor-group:after {
+    color: #000000 !important;
+    font-size: 10px !important;
+    bottom: -24px !important;
+    font-weight: bold;
+  }
+
+  /* Warna hitam untuk flipdown dengan angka putih */
+  .flipdown .rotor-top,
+  .flipdown .rotor-bottom {
+    background-color: #d3d3d3 !important;
+    color: #000000 !important;
+  }
+
+  .flipdown .rotor-leaf-rear {
+    background-color: #d3d3d3 !important;
+  }
+
+  .flipdown .rotor-leaf-front {
+    background-color: #d3d3d3 !important;
+  }
+
+  .flipdown .rotor-top {
+    border-bottom: 1px solid #333 !important;
+  }
+}
+  /* Gaya Spesifik untuk iPad Mini (768px - 799px) */
+  @media (min-width: 768px) and (max-width: 799px) {
+    /* FLEX CONTAINER UTAMA UNTUK DUA KOLOM */
+    .flex-col.md\:flex-row {
+      gap: 16px !important;
+      align-items: center !important; /* MODIFIKASI DI SINI */
+    }
+    
+    /* PENGATURAN KOLOM KIRI (KOTAK HITAM) */
+    .w-full.md\:flex-1.md\:max-w-md { /* Wrapper untuk kotak hitam */
+      flex: 0 0 52% !important;
+      max-width: 52% !important;
+    }
+    
+    /* PENGATURAN KOLOM KANAN (KOTAK MERAH) */
+    .w-full.md\:w-auto { /* Wrapper untuk kotak merah */
+      flex: 0 0 46% !important;
+      max-width: 46% !important;
+    }
+    
+    /* STYLING KOTAK HITAM (.bg-gray-800) UNTUK IPAD MINI */
+    .bg-gray-800 { 
+      padding: 16px 14px !important;
+      /* justify-content default dari kelas HTML (justify-between) akan berlaku */
+    }
+    
+    .bg-gray-800 p.text-yellow-300 { 
+      font-size: 17px !important;
+      line-height: 1.25 !important;
+      margin-bottom: 8px !important;
+    }
+    
+    .bg-gray-800 p.text-gray-100 { 
+      font-size: 14px !important;
+      line-height: 1.35 !important;
+      margin-bottom: 12px !important;
+    }
+    
+    .neon-penawaran-button { 
+      padding: 10px 18px !important;
+      font-size: 15px !important;
+    }
+    
+    /* STYLING KOTAK MERAH (.promo-timer-section-wrapper) UNTUK IPAD MINI */
+    .promo-timer-section-wrapper {
+      padding: 24px 10px 32px !important; 
+      height: 100% !important; 
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important; 
+    }
+    
+    .promo-timer-text-line { 
+      font-size: 14px !important; 
+      margin-bottom: 12px !important; 
+      white-space: normal !important; 
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* FLIPDOWN TIMER STYLES UNTUK IPAD MINI */
+    .flipdown {
+      transform: scale(0.70) !important; 
+      transform-origin: center;
+      padding: 0 1px !important; 
+    }
+    .flipdown.rotor-group {
+      margin: 0 1px !important; 
+    }
+    .flipdown.rotor {
+      width: 19px !important;   
+      height: 26px !important;  
+    }
+    .flipdown.rotor-top,
+    .flipdown.rotor-bottom {
+      font-size: 16px !important; 
+      line-height: 26px !important;
+    }
+    .flipdown.rotor-group:after { 
+      font-size: 7px !important;  
+      bottom: -14px !important; 
+      white-space: nowrap;
+    }
+
+    .relative img.w-full { 
+      max-width: 90% !important; 
+      margin: 0 auto;
+    }
+  }
+
+  /* Gaya Spesifik untuk iPad Air (800px - 1180px) */
+  @media (min-width: 800px) and (max-width: 1180px) {
+    /* FLEX CONTAINER UTAMA UNTUK DUA KOLOM */
+    .flex-col.md\:flex-row {
+      gap: 16px !important;
+      align-items: center !important; /* MODIFIKASI DI SINI */
+    }
+    
+    /* PENGATURAN KOLOM KIRI (KOTAK HITAM) */
+    .w-full.md\:flex-1.md\:max-w-md { 
+      flex: 0 0 52% !important;
+      max-width: 52% !important;
+    }
+    
+    /* PENGATURAN KOLOM KANAN (KOTAK MERAH) */
+    .w-full.md\:w-auto { 
+      flex: 0 0 46% !important;
+      max-width: 46% !important;
+    }
+    
+    /* STYLING KOTAK HITAM (.bg-gray-800) UNTUK IPAD AIR */
+    .bg-gray-800 { 
+      padding: 16px 14px !important;
+      justify-content: center !important; 
+    }
+    
+    .bg-gray-800 p.text-yellow-300 { 
+      font-size: 17px !important;
+      line-height: 1.25 !important;
+      margin-bottom: 8px !important;
+    }
+    
+    .bg-gray-800 p.text-gray-100 { 
+      font-size: 14px !important;
+      line-height: 1.35 !important;
+      margin-bottom: 12px !important;
+    }
+    
+    .neon-penawaran-button { 
+      padding: 10px 18px !important;
+      font-size: 15px !important;
+    }
+    
+    /* STYLING KOTAK MERAH (.promo-timer-section-wrapper) UNTUK IPAD AIR */
+    .promo-timer-section-wrapper {
+      padding: 24px 10px 32px !important; 
+      height: 100% !important; 
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important; 
+    }
+    
+    .promo-timer-text-line { 
+      font-size: 14px !important; 
+      margin-bottom: 12px !important; 
+      white-space: normal !important; 
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* FLIPDOWN TIMER STYLES UNTUK IPAD AIR */
+    .flipdown {
+      transform: scale(0.80) !important; 
+      transform-origin: center;
+      padding: 0 1px !important; 
+    }
+    .flipdown.rotor-group {
+      margin: 0 2px !important; 
+    }
+    .flipdown.rotor {
+      width: 22px !important;    
+      height: 30px !important;   
+    }
+    .flipdown.rotor-top,
+    .flipdown.rotor-bottom {
+      font-size: 18px !important; 
+      line-height: 30px !important;
+    }
+    .flipdown.rotor-group:after { 
+      font-size: 8px !important;  
+      bottom: -16px !important; 
+      white-space: nowrap;
+    }
+    
+    .relative img.w-full { 
+      max-width: 90% !important; 
+      margin: 0 auto;
+    }
+  }
+  .testimonials-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    padding: 0 1rem;
+    font-size: 1.25rem; /* 20px */
+  }
+  
+  @media (min-width: 640px) {
+    .testimonials-title { font-size: 1.5rem; /* 24px */ }
+  }
+  
+  @media (min-width: 768px) {
+    .testimonials-title { font-size: 1.875rem; /* 30px */ }
+  }  
 </style>
 </head>
 <body class="bg-gray-900">
@@ -397,7 +756,7 @@
           <span class="hidden sm:inline">Koleksi Lengkap! Seluruh Anime Dragon Ball Series <br>(Goku Kecil, DBZ, GT, Super sampai Daima)</span>
         </p>
         <p class="text-sm sm:text-base md:text-lg text-gray-100 font-poppins-sb leading-tight" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
-          Tanpa Iklan, Tanpa Ribet, Langsung di HP lo!
+           
         </p>
       </div>
       <div class="flex flex-col md:flex-row items-center justify-center gap-x-6 gap-y-4 mt-4 md:mt-6 w-full">
@@ -420,27 +779,31 @@
     </div>
   </section>
 
-  <section class="comic-bg pt-8 md:pt-12 pb-8 px-4">
-    <div class="main-container">
-      <h2 class="text-center mb-6 md:mb-12">
-        <span class="block md:hidden text-left">
-          <span class="font-helvetica-custom text-black text-[22px] font-bold leading-tight">
-            KEUNGGULAN KOLEKSI KAMI
-          </span>
-        </span>
-        <span class="hidden md:block lg:hidden">
-          <span class="font-saiyan text-yellow-400 text-5xl leading-snug"
-                style="color: #FFD700; -webkit-text-stroke: 0.9px #000; text-shadow: none;">
-            KUALITAS HD • SUB INDO<br> • NO BUFFERING • LIFETIME ACCESS
-          </span>
-        </span>
-        <span class="hidden lg:block">
-          <span class="font-saiyan text-yellow-400 text-3xl xl:text-4xl leading-snug"
-                style="color: #FFD700; -webkit-text-stroke: 0.9px #000; text-shadow: none;">
-            KUALITAS HD • SUB INDO • NO BUFFERING • LIFETIME ACCESS
-          </span>
-        </span>
-      </h2>
+	<section class="comic-bg pt-8 md:pt-12 pb-8 px-4">
+	  <div class="main-container">
+		<h2 class="text-center mb-6 md:mb-12">
+		  <!-- Mobile View (2 baris) -->
+		  <span class="block md:hidden">
+			<span class="font-helvetica-custom text-black text-[16px] font-bold leading-tight">
+			  KUALITAS HD • SUB INDO<br>NO BUFFERING • LIFETIME ACCESS
+			</span>
+		  </span>
+
+		  <!-- Tablet View (1 baris, font kecil) -->
+		  <span class="hidden md:block lg:hidden">
+			<span class="font-helvetica-custom text-black text-xl leading-snug">
+			  KUALITAS HD • SUB INDO • NO BUFFERING • LIFETIME ACCESS
+			</span>
+		  </span>
+
+		  <!-- Desktop View -->
+		  <span class="hidden lg:block">
+			  <span class="font-saiyan text-yellow-400 text-3xl xl:text-4xl leading-snug"
+					style="color: #FFD700; -webkit-text-stroke: 0.9px #000; text-shadow: none;">
+				KUALITAS HD • SUB INDO • NO BUFFERING • LIFETIME ACCESS
+			  </span>
+		  </span>
+		</h2>
 
       <div class="scroll-wrapper">
         <button class="nav-arrow arrow-left" id="scrollLeft">‹</button>
@@ -463,12 +826,31 @@
     </div>
   </section>
 
-  <section class="comic-bg pt-4 md:pt-8 pb-8 px-4">
-    <div class="main-container">
-      <h2 class="font-saiyan text-[22px] sm:text-2xl md:text-3xl text-yellow-400 text-left md:text-center mb-6 md:mb-8"
-          style="text-shadow: none; -webkit-text-stroke: 0.9px #000; color: #FFD700;">
-        KEUNGGULAN KOLEKSI KAMI
-      </h2>
+<section class="comic-bg pt-4 md:pt-8 pb-8 px-4">
+  <div class="main-container">
+    <h2 class="text-left md:text-center mb-6 md:mb-8">
+      <!-- Phone View (mobile) -->
+      <span class="md:hidden">
+        <span class="font-helvetica-custom text-black text-[18px] font-bold">
+          KEUNGGULAN KOLEKSI KAMI
+        </span>
+      </span>
+
+      <!-- Tablet View -->
+      <span class="hidden md:block lg:hidden">
+        <span class="font-helvetica-custom text-black text-3xl font-bold">
+          KEUNGGULAN KOLEKSI KAMI
+        </span>
+      </span>
+
+      <!-- Desktop View -->
+      <span class="hidden lg:block">
+        <span class="font-saiyan text-yellow-400 text-3xl xl:text-4xl"
+              style="color: #FFD700; -webkit-text-stroke: 0.9px #000; text-shadow: none;">
+          KEUNGGULAN KOLEKSI KAMI
+        </span>
+      </span>
+    </h2>
       
       <div class="feature-cards">
         <div class="feature-card">
@@ -528,32 +910,32 @@
             </video>
           </div>
         
-          <div class="w-full lg:w-1/2 space-y-4">
-            <h3 class="text-lg sm:text-xl md:text-2xl lg:text-2xl text-gray-800 font-helvetica-custom">🎮 BONUS GAME DBZ!</h3>
+          <div class="w-full lg:w-1/2 space-y-4 bonus-game-text-column">
+            <h3 class="font-helvetica-custom text-gray-800">🎮 BONUS GAME DBZ!</h3>
             
-            <p class="text-xs sm:text-base md:text-lg lg:text-xl text-gray-800">
-              <span class="block sm:hidden">
+            <p class="text-gray-800">
+              <span class="dapatkan-phone-narrow">
                 Dapatkan Game<br>
                 <span class="text-red-600 font-bold">Dragon Ball Z: Legacy</span>
                 <span class="bg-red-600 text-white px-1 py-0.5 text-[10px] align-middle ml-1 rounded">TERBATAS</span>
               </span>
-              <span class="hidden sm:block whitespace-nowrap">
+              <span class="dapatkan-tablet-desktop whitespace-nowrap">
                 Dapatkan <span class="text-red-600 font-bold">Dragon Ball Z: Legacy</span>
                 <span class="bg-red-600 text-white px-2 py-1 text-xs sm:text-sm align-middle ml-1 rounded-md">TERBATAS</span>
               </span>
             </p>
             
-            <ul class="list-disc pl-5 space-y-2 text-xs sm:text-base md:text-lg lg:text-xl text-gray-800 font-medium">
+            <ul class="list-disc pl-5 space-y-2 text-gray-800 font-medium">
               <li>Versi lengkap game premium<br class="break-very-narrow-phone"> <span class="text-emerald-600">(tanpa iklan/in-app purchase)</span></li>
               <li>Karakter eksklusif:<br class="break-very-narrow-phone"> <span class="text-red-600 font-bold">SSJ4 Gogeta</span> + 5 hidden fighters</li>
               <li>Support perangkat:<br class="break-very-narrow-phone"> <span class="text-blue-600">Android 10+</span> / iOS 15+</li>
             </ul>
             
-            <div class="bg-gray-100 p-3 rounded-lg mt-4 text-xs sm:text-base md:text-base lg:text-lg">
+            <div class="bg-gray-100 p-3 rounded-lg mt-4 bonus-game-slot-text">
               <p class="text-red-600 font-bold flex items-center gap-2">
                 ⚠️ 
-                <span class="block sm:hidden">Hanya sisa 30/100 slot</span>
-                <span class="hidden sm:block">Hanya 30/100 slot tersedia!</span>
+                <span class="slot-phone-narrow">Hanya sisa 30/100 slot</span>
+                <span class="slot-tablet-desktop">Hanya 30/100 slot tersedia!</span>
               </p>
             </div>
           </div>
@@ -564,20 +946,34 @@
         </div>
 
         <div class="flex flex-col md:flex-row items-center md:items-stretch justify-center gap-4 my-8 px-2 sm:px-4 w-full">
-          <div class="w-full md:flex-1 md:max-w-md">
-            <div class="bg-gray-800 bg-opacity-80 backdrop-blur-sm p-6 rounded-xl shadow-2xl text-center h-full flex flex-col justify-between">
-              <div>
-                <p class="text-yellow-300 font-poppins-sb font-semibold text-lg md:text-xl leading-tight mb-2">
-                  KOLEKSI DRAGON BALL TERLENGKAP<br>
-                  <span class="text-yellow-300">SE-INDONESIA!🔥🔥🔥</span>
-                </p>
-                <p class="text-gray-100 text-sm md:text-base mb-4">
-                  Akses Seumur Hidup Semua Series,<br>
-                  Movie, OVA dan Komiknya!<br>
-                  Jangan Sampai Kehabisan Slot Promonya!
-                </p>
-              </div>
+<div class="w-full md:flex-1 md:max-w-md">
+  <!-- Desktop: tampilkan semua -->
+  <div class="hidden md:block bg-gray-800 bg-opacity-80 backdrop-blur-sm p-6 rounded-xl shadow-2xl text-center h-full flex flex-col justify-between">
+    <div>
+      <p class="text-yellow-300 font-poppins-sb font-semibold text-lg md:text-xl leading-tight mb-2">
+        KOLEKSI DRAGON BALL TERLENGKAP<br>
+        <span class="text-yellow-300">SE-INDONESIA!🔥🔥🔥</span>
+      </p>
+      <p class="text-gray-100 text-sm md:text-base mb-4">
+        Akses Seumur Hidup Semua Series,<br>
+        Movie, OVA dan Komiknya!<br>
+        Jangan Sampai Kehabisan Slot Promonya!
+      </p>
+    </div>
               <a href="#link-checkout-mu" class="neon-penawaran-button inline-flex items-center justify-center py-3 px-6 text-sm sm:text-base mt-auto">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 300.005 300.005">
+                  <path d="M149.354,146.641c-4.298,0-7.781,3.483-7.781,7.781v54.541c0,4.298,3.483,7.781,7.781,7.781 c4.295,0,7.781-3.483,7.781-7.781v-54.541C157.135,150.124,153.648,146.641,149.354,146.641z"/>
+                  <path d="M111.7,146.641c-4.298,0-7.781,3.483-7.781,7.781v54.541c0,4.298,3.483,7.781,7.781,7.781 c4.298,0,7.781-3.483,7.781-7.781v-54.541C119.481,150.124,115.997,146.641,111.7,146.641z"/>
+                  <path d="M187.005,146.641c-4.3,0-7.781,3.483-7.781,7.781v54.541c0,4.298,3.481,7.781,7.781,7.781 c4.295,0,7.781-3.483,7.781-7.781v-54.541C194.786,150.124,191.301,146.641,187.005,146.641z"/>
+                  <path d="M150,0C67.159,0,0.002,67.162,0.002,150S67.159,300.005,150,300.005S300.003,232.841,300.003,150S232.841,0,150,0z M231.341,153.208l-11.495,67.961c0,6.634-5.379,12.014-12.016,12.014H90.875c-6.634,0-12.014-5.379-12.014-12.014 l-11.495-67.961c-4.451-3.582-7.358-9.005-7.358-15.157c0-10.312,8.001-18.736,18.127-19.452l33.087-48.389 c2.425-3.545,7.262-4.458,10.815-2.031c3.548,2.428,4.456,7.267,2.031,10.815l-27.031,39.535h104.64l-27.036-39.535 c-2.428-3.548-1.52-8.388,2.031-10.815c3.545-2.425,8.388-1.512,10.815,2.031l33.09,48.389 c10.12,0.718,18.119,9.143,18.119,19.452C238.697,144.206,235.789,149.627,231.341,153.208z"/>
+                </svg>
+                <span>KLAIM HARGA PROMO!</span>
+              </a>
+  </div>
+  
+  <!-- Mobile: hanya tombol tanpa background -->
+  <div class="md:hidden text-center">
+    <a href="#link-checkout-mu" class="neon-penawaran-button inline-flex items-center justify-center py-3 px-6 text-sm sm:text-base mx-auto">
                 <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 300.005 300.005">
                   <path d="M149.354,146.641c-4.298,0-7.781,3.483-7.781,7.781v54.541c0,4.298,3.483,7.781,7.781,7.781 c4.295,0,7.781-3.483,7.781-7.781v-54.541C157.135,150.124,153.648,146.641,149.354,146.641z"/>
                   <path d="M111.7,146.641c-4.298,0-7.781,3.483-7.781,7.781v54.541c0,4.298,3.483,7.781,7.781,7.781 c4.298,0,7.781-3.483,7.781-7.781v-54.541C119.481,150.124,115.997,146.641,111.7,146.641z"/>
@@ -602,7 +998,9 @@
         </div>
         
         <section class="testimonials-section">
-          <h2 class="testimonials-title">APA KATA MEREKA?</h2>
+            <h2 class="testimonials-title whitespace-nowrap text-left px-4"
+			  style="font-size: clamp(14px, 4vw, 24px);">💬 APA KATA MEREKA?
+		  </h2>
           <div class="testimonials-container space-y-8">
             <div class="testimonial-manga-3frame">
               <img src="./images/member_icon_52.png" alt="Avatar Rizky" class="testimonial-avatar-manga">
@@ -657,8 +1055,9 @@
 <script src="https://cdn.jsdelivr.net/npm/flipdown@0.3.2/dist/flipdown.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+  // BAGIAN 1: PENGATURAN WAKTU TARGET (Digunakan oleh kedua timer)
   let targetTimeUnix;
-  const promoDurationSeconds = 10 * 60 * 60; 
+  const promoDurationSeconds = 10 * 60 * 60; // 10 jam
   const storedTargetTime = localStorage.getItem('promoTargetTimeUnix');
   const nowUnix = Math.floor(Date.now() / 1000);
 
@@ -669,6 +1068,7 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem('promoTargetTimeUnix', targetTimeUnix);
   }
 
+  // BAGIAN 2: INISIALISASI DAN LOGIKA UNTUK TIMER TEKS DI HEADER
   const headerTimerEl = document.getElementById("promo-header-timer"); 
   let headerIntervalId;
 
@@ -702,12 +1102,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // BAGIAN 3: INISIALISASI DAN LOGIKA UNTUK FLIPDOWN TIMER UTAMA (di bawah)
   const mainFlipdownContainer = document.getElementById("flipdown"); 
   let mainFlipdownInstance;
 
   if (mainFlipdownContainer && targetTimeUnix && !isNaN(targetTimeUnix)) { 
     mainFlipdownInstance = new FlipDown(targetTimeUnix, {
-      theme: "light"
+      theme: "light" 
     })
       .start()
       .ifEnded(() => {
@@ -727,13 +1128,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const setLabels = () => {
       if (!mainFlipdownContainer) return;
       const groups = document.querySelectorAll('#flipdown .rotor-group');
-      if (groups.length >= 4) {
-        if(groups[1]) groups[1].setAttribute('data-label', 'Jam');
-        if(groups[2]) groups[2].setAttribute('data-label', 'Menit');
-        if(groups[3]) groups[3].setAttribute('data-label', 'Detik');
+      const visibleGroups = Array.from(groups).filter(g => window.getComputedStyle(g).display !== 'none');
+      if (visibleGroups.length >= 3) { 
+        if(visibleGroups[0]) visibleGroups[0].setAttribute('data-label', 'Jam');
+        if(visibleGroups[1]) visibleGroups[1].setAttribute('data-label', 'Menit');
+        if(visibleGroups[2]) visibleGroups[2].setAttribute('data-label', 'Detik');
       }
     };
-    const removeDividerDots = () => {
+    
+    const removeDividerDots = () => { 
       if (!mainFlipdownContainer) return;
       const dividers = document.querySelectorAll('#flipdown .rotor-group-divider');
       dividers.forEach(div => {
@@ -741,12 +1144,14 @@ document.addEventListener("DOMContentLoaded", function () {
         div.style.display = 'none';
       });
     };
+
     setTimeout(() => {
       setLabels();
-      removeDividerDots();
+      removeDividerDots(); 
     }, 250); 
   }
 
+  // BAGIAN 4: SCRIPT LAIN DARI FILE-MU (Card Scroller, Tombol View More)
   const cardsContainer = document.getElementById('cardsContainer');
   if (cardsContainer) {
     const scrollLeftBtn = document.getElementById('scrollLeft');
@@ -786,8 +1191,7 @@ document.addEventListener("DOMContentLoaded", function () {
       this.blur();
     });
   }
-});
+}); 
 </script>
-
 </body>
 </html>
