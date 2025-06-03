@@ -8,7 +8,9 @@
   <meta name="description" content="Koleksi Lengkap Dragon Ball Series - Anime, Movie, OVA, Komik & Soundtrack. Akses Seumur Hidup!">
   <meta name="keywords" content="dragon ball, anime, dbz, goku, vegeta, koleksi lengkap">
   
-  <title>Dragon Ball Ultimate Collection | Lifetime Access</title>
+  <title>(PROMO) KOLEKSI LENGKAP FILM DRAGON BALL SUB BAHASA INDONESIA</title>
+  
+  <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
   
   <link rel="preconnect" href="https://cdn.tailwindcss.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -44,6 +46,13 @@
     font-style: normal;
     font-display: swap;
   }
+  @font-face {
+    font-family: 'Nunito Sans';
+    src: url('./images/NunitoSans.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }  
   .font-helvetica-custom {
     font-family: Helvetica, Arial, sans-serif;
   }
@@ -739,13 +748,116 @@
   
   @media (min-width: 768px) {
     .testimonials-title { font-size: 1.875rem; /* 30px */ }
-  }  
+  }
+#fake-sales-notification {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: -400px;
+  
+  background-color: #f8f9fa; 
+  border-left: 3px solid #17a2b8;
+  /* Penyesuaian border-radius agar konsisten dengan border-left yang tidak melengkung */
+  border-radius: 0 0.25rem 0.25rem 0; 
+  
+  /* Tambahkan border untuk sisi lainnya jika belum ada atau jika baris komentar di bawahnya diaktifkan */
+  border-top: 1px solid #dee2e6;    /* Contoh warna border, sesuaikan */
+  border-right: 1px solid #dee2e6;   /* Contoh warna border, sesuaikan */
+  border-bottom: 1px solid #dee2e6; /* Contoh warna border, sesuaikan */
+
+  padding: 0; 
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1); 
+
+  z-index: 10000;
+  width: auto; 
+  min-width: 280px; 
+  max-width: 330px;
+  font-family: Arial, sans-serif;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #212529;
+  transition: right 0.5s ease-in-out;
+  font-family: 'Nunito Sans', Arial, sans-serif;
+}
+
+#fake-sales-notification.show {
+  right: 20px;
+  display: block;
+}
+
+.notification-inner-wrapper {
+  display: flex;
+  align-items: flex-start; 
+  padding: 0.75rem 1rem;
+}
+
+.toast-icon-container {
+  margin-right: 10px; 
+  flex-shrink: 0;
+  margin-top: 2px; 
+}
+
+.toast-icon-container svg { /* Untuk ikon lonceng */
+  width: 18px;  
+  height: 18px;
+  /* Karena ikon lonceng Anda menggunakan 'stroke' dan 'fill="none"' di HTML,
+     CSS 'fill' di sini tidak akan berpengaruh pada warnanya.
+     Warna dan ketebalan stroke sudah diatur di tag SVG-nya. */
+}
+
+.notification-text-content {
+  flex-grow: 1;
+}
+
+#fake-sales-notification p {
+  margin: 0;
+}
+
+#fake-sales-notification #notification-text-line1 {
+  /* Tidak ada perubahan spesifik, biarkan default atau sesuaikan */
+}
+
+#fake-sales-notification #notification-text-line1 .product-name-placeholder,
+#fake-sales-notification #notification-text-line1 .price {
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Modifikasi dan penambahan untuk teks "Verified by" */
+#fake-sales-notification .verified-by-text {
+  font-size: 7pt;    
+  color: #17a2b8;     
+  margin-top: 5px;    
+  
+  /* --- PENAMBAHAN PENTING --- */
+  display: flex;        /* Mengaktifkan Flexbox untuk menyejajarkan ikon centang dan teks */
+  align-items: center;  /* Menyejajarkan item di tengah secara vertikal */
+  /* text-align: left; sudah tidak terlalu relevan dengan flex, tapi tidak masalah jika ada */
+}
+
+.verified-checkmark-icon { /* Untuk ikon centang SVG */
+  margin-right: 4px; 
+  flex-shrink: 0;   
+  /* Ukuran sudah diatur di HTML (width="12" height="12")
+     Warna stroke juga sudah diatur di HTML (stroke="#17a2b8") */
+  /* Untuk memastikan ikon SVG sejajar dengan baik dengan teks kecil: */
+  display: inline-flex; /* Atau display: block; tergantung kebutuhan alignment */
+  vertical-align: middle; /* Coba ini jika alignment vertikal kurang pas */
+}
+
+/* Styling untuk <span> di dalam .verified-by-text jika diperlukan */
+#fake-sales-notification .verified-by-text span {
+  line-height: 1; /* Bisa membantu menstabilkan tinggi baris teks */
+}
 </style>
 </head>
 <body class="bg-gray-900">
   <section class="hero-section overflow-hidden">
-    <video autoplay loop muted playsinline class="absolute w-full h-full object-cover opacity-60">
+    <video autoplay loop muted playsinline class="absolute w-full h-full object-cover opacity-60" poster="./images/bg-video.jpg">
       <source src="./images/bg-video.webm" type="video/webm">
+      <source src="./images/bg-video.mp4" type="video/mp4">
+      <img src="./images/bg-video.jpg" alt="Background utama video">
+      Browser Anda tidak mendukung tag video.
     </video>
     <div class="pixel-grid-overlay absolute inset-0 z-[1]"></div>
     <div class="relative z-[2] inset-0 flex flex-col justify-center items-center text-center px-4 h-full">
@@ -852,50 +964,56 @@
       </span>
     </h2>
       
-      <div class="feature-cards">
-        <div class="feature-card">
-          <div class="character-circle">
-            <picture>
-              <source srcset="./images/frieza.webp" type="image/webp">
-              <source srcset="./images/frieza.mp4" type="video/mp4">
-              <img class="character-portrait" src="./images/frieza.jpg" alt="Frieza" loading="lazy">
-            </picture>
-          </div>
-          <h3 class="feature-title">LIFETIME ACCESS 🔄</h3>
-          <p class="feature-desc">Akses permanen ke seluruh konten Dragon Ball tanpa biaya berulang. Tonton kapan saja, selamanya.</p>
-        </div>
-        <div class="feature-card">
-          <div class="character-circle">
-            <picture>
-              <source srcset="./images/cell.webp" type="image/webp">
-              <source srcset="./images/cell.mp4" type="video/mp4">			  
-              <img class="character-portrait" src="./images/cell.jpg" alt="Cell" loading="lazy">
-            </picture>
-          </div>
-          <h3 class="feature-title">KUALITAS HD 🌟</h3>
-          <p class="feature-desc">Streaming resolusi 1080p dengan audio jernih. Nikmati setiap detail animasi seperti baru dibuat.</p>
-        </div>
-        <div class="feature-card">
-          <div class="character-circle">
-            <picture>
-              <source srcset="./images/broly.webp" type="image/webp">
-              <img class="character-portrait" src="./images/broly.jpg" alt="Broly" loading="lazy">
-            </picture>
-          </div>
-          <h3 class="feature-title">KONTEN EKSKLUSIF 🔐</h3>
-          <p class="feature-desc">Materi langka termasuk OVA, behind-the-scenes, dan wawancara eksklusif dengan staf produksi.</p>
-        </div>
-        <div class="feature-card">
-          <div class="character-circle">
-            <picture>
-              <source srcset="./images/zamasu.webp" type="image/webp">
-              <img class="character-portrait" src="./images/zamasu.jpg" alt="Zamasu" loading="lazy">
-            </picture>
-          </div>
-          <h3 class="feature-title">BONUS SOUNDTRACK 🎵</h3>
-          <p class="feature-desc">Koleksi lengkap musik ikonik dari seluruh seri Dragon Ball dalam format digital berkualitas tinggi.</p>
-        </div>
-      </div>
+		<div class="feature-cards">
+		  <div class="feature-card">
+			<div class="character-circle">
+			  <video width="100%" height="100%" autoplay loop muted playsinline poster="./images/frieza.png">
+				<source src="./images/frieza.webm" type="video/webm">
+				<source src="./images/frieza.mp4" type="video/mp4">
+				<img class="character-portrait" src="./images/frieza.png" alt="Frieza Portrait">
+				Browser Anda tidak mendukung tag video.
+			  </video>
+			</div>
+			<h3 class="feature-title">LIFETIME ACCESS 🔄</h3>
+			<p class="feature-desc">Akses permanen ke seluruh konten Dragon Ball tanpa biaya berulang. Tonton kapan saja, selamanya.</p>
+		  </div>
+		  <div class="feature-card">
+			<div class="character-circle">
+			  <video width="100%" height="100%" autoplay loop muted playsinline poster="./images/cell.png">
+				<source src="./images/cell.webm" type="video/webm">
+				<source src="./images/cell.mp4" type="video/mp4">
+				<img class="character-portrait" src="./images/cell.png" alt="Cell Portrait">
+				Browser Anda tidak mendukung tag video.
+			  </video>
+			</div>
+			<h3 class="feature-title">KUALITAS HD 🌟</h3>
+			<p class="feature-desc">Streaming resolusi 1080p dengan audio jernih. Nikmati setiap detail animasi seperti baru dibuat.</p>
+		  </div>
+		  <div class="feature-card">
+			<div class="character-circle">
+			  <video width="100%" height="100%" autoplay loop muted playsinline poster="./images/broly.png">
+				<source src="./images/broly.webm" type="video/webm">
+				<source src="./images/broly.mp4" type="video/mp4">
+				<img class="character-portrait" src="./images/broly.png" alt="Broly Portrait">
+				Browser Anda tidak mendukung tag video.
+			  </video>
+			</div>
+			<h3 class="feature-title">KONTEN EKSKLUSIF 🔐</h3>
+			<p class="feature-desc">Materi langka termasuk OVA, behind-the-scenes, dan wawancara eksklusif dengan staf produksi.</p>
+		  </div>
+		  <div class="feature-card">
+			<div class="character-circle">
+			  <video width="100%" height="100%" autoplay loop muted playsinline poster="./images/zamasu.png">
+				<source src="./images/zamasu.webm" type="video/webm">
+				<source src="./images/zamasu.mp4" type="video/mp4">
+				<img class="character-portrait" src="./images/zamasu.png" alt="Zamasu Portrait">
+				Browser Anda tidak mendukung tag video.
+			  </video>
+			</div>
+			<h3 class="feature-title">BONUS SOUNDTRACK 🎵</h3>
+			<p class="feature-desc">Koleksi lengkap musik ikonik dari seluruh seri Dragon Ball dalam format digital berkualitas tinggi.</p>
+		  </div>
+		</div>
     </div>
   </section>
 
@@ -905,8 +1023,11 @@
 
         <div class="flex flex-col lg:flex-row lg:items-start items-center gap-8 mb-12 md:mb-16">
           <div class="w-full lg:w-1/2 overflow-hidden rounded-xl mb-6 lg:mb-0">
-            <video class="w-full h-auto" autoplay loop muted playsinline>
+            <video class="w-full h-auto" autoplay loop muted playsinline poster="./images/dbz-gameplay.jpg">
               <source src="./images/dbz-gameplay.webm" type="video/webm">
+              <source src="./images/dbz-gameplay.mp4" type="video/mp4">
+              <img src="./images/dbz-gameplay.png" alt="DBZ Gameplay Video Fallback">
+              Browser Anda tidak mendukung tag video.
             </video>
           </div>
         
@@ -1051,7 +1172,35 @@
       </div> 
     </div> 
   </section> 
-
+<div id="fake-sales-notification">
+  <div class="notification-inner-wrapper">
+    <span class="toast-icon-container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#17a2b8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" name="bell" class="mr-18 big-icon rui-icon">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+      </svg>
+    </span>
+    <div class="notification-text-content">
+      <p id="notification-text-line1"></p>
+      <p id="notification-text-line2" class="verified-by-text">
+        <svg xmlns="http://www.w3.org/2000/svg" 
+             width="12" height="12"  
+             viewBox="0 0 24 24" 
+             fill="none" 
+             stroke="#17a2b8"        
+             stroke-width="2"       
+             stroke-linecap="round" 
+             stroke-linejoin="round" 
+             name="check-square" 
+             class="verified-checkmark-icon">
+          <polyline points="9 11 12 14 22 4"></polyline>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+        </svg>
+        <span>Transaction Verified by [Nama Gateway Akan Muncul Di Sini]</span> 
+      </p>
+    </div>
+  </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/flipdown@0.3.2/dist/flipdown.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -1192,6 +1341,105 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 }); 
+</script>
+<script>
+(function() {
+  const notificationElement = document.getElementById('fake-sales-notification');
+  const line1Element = document.getElementById('notification-text-line1');
+  const line2Element = document.getElementById('notification-text-line2'); 
+
+  if (!notificationElement || !line1Element || !line2Element) {
+    return;
+  }
+
+  const firstNames = [
+    "Adi", "Ayu", "Ben", "Bay", "Cit", "Cah", "Dan", "Dew", "Eka", "Els", 
+    "Fik", "Fit", "Gan", "Gis", "Har", "Han", "Ida", "Ind", "Jan", "Jul", 
+    "Kar", "Kes", "Leo", "Lia", "Man", "May", "Nan", "Nov", "Okt", "Put", 
+    "Qor", "Rah", "Ran", "San", "Set", "Sur", "Tat", "Tia", "Umi", "Vid", 
+    "Wah", "Wen", "Xen", "Yan", "Yud", "Zul", "Zia", "Kir", "Jok", "Meg"
+  ];
+
+  const productName = "produk (PROMO) KOLEKSI DRAGON BALL BAHASA INDONESIA";
+  
+  const paymentGateways = [
+    "Midtrans", 
+    "Xendit", 
+    "GoPay", 
+    "OVO", 
+    "DANA", 
+    "ShopeePay"
+  ];
+
+  function showNotification() {
+    // 1. Membuat format email (seperti sebelumnya)
+    const randomFirstNamePart1 = firstNames[Math.floor(Math.random() * firstNames.length)];
+    const randomFirstNamePart2 = firstNames[Math.floor(Math.random() * firstNames.length)];
+    const emailUser = `${randomFirstNamePart1}***(${randomFirstNamePart2}***@gmail.com)`;
+
+    // 2. Membuat harga dengan biaya admin fiktif yang masuk akal dan 3 digit terakhir acak
+    const baseProductPrice = 120000; // Harga dasar produk Anda
+
+    // Tentukan rentang "dasar" untuk biaya admin (misalnya dalam ribuan).
+    // Ini akan memastikan biaya admin tidak terlalu kecil (minimal Rp 1.000 + Rp 1).
+    const adminFeeBaseThousandsOptions = [1000, 2000, 3000, 4000]; // Pilihan dasar biaya admin (1rb, 2rb, 3rb, 4rb)
+    const randomBaseAdminFee = adminFeeBaseThousandsOptions[Math.floor(Math.random() * adminFeeBaseThousandsOptions.length)];
+
+    // Tambahkan 3 digit acak (1-999) untuk membuat bagian ratusan/puluhan/satuan dari biaya admin.
+    // Ini untuk memastikan 3 digit terakhir harga tidak selalu "000".
+    const randomHundredsTensUnits = Math.floor(Math.random() * 999) + 1; // Angka antara 1-999
+
+    const totalAdminFee = randomBaseAdminFee + randomHundredsTensUnits; // Total biaya admin fiktif
+                                                                       // Akan berkisar antara 1001 s/d 4999
+
+    const finalPrice = baseProductPrice + totalAdminFee; // Harga produk + total biaya admin
+
+    // Format harga final ke dalam string Rupiah dengan pemisah ribuan titik
+    const finalPriceString = `Rp ${finalPrice.toLocaleString('id-ID')},-`;
+
+    // Mengisi baris pertama notifikasi
+    line1Element.innerHTML = `<span style="font-weight:bold;">${emailUser}</span> baru saja membeli produk <span style="font-weight:bold;">${productName}</span> senilai <span style="font-weight:bold;">${finalPriceString}</span>`;
+    
+    // Memilih payment gateway secara acak (tetap sama)
+    const randomGateway = paymentGateways[Math.floor(Math.random() * paymentGateways.length)];
+    const verifiedByTextContent = `Transaction Verified by ${randomGateway}`;
+
+    const textSpanElement = line2Element.querySelector('span'); 
+    if (textSpanElement) {
+      textSpanElement.textContent = verifiedByTextContent;
+    }
+
+    // Menampilkan notifikasi (tetap sama)
+    notificationElement.style.display = 'block';
+    setTimeout(() => {
+        notificationElement.classList.add('show');
+    }, 50);
+
+    // Menyembunyikan notifikasi (tetap sama)
+    setTimeout(() => {
+      notificationElement.classList.remove('show');
+      setTimeout(() => {
+        if (!notificationElement.classList.contains('show')) {
+            notificationElement.style.display = 'none';
+        }
+      }, 550);
+    }, 6000);
+  }
+
+  function scheduleNextNotification() {
+    if (notificationElement.classList.contains('show')) {
+      setTimeout(scheduleNextNotification, 7000);
+      return;
+    }
+    showNotification();
+    
+    const randomInterval = Math.random() * (25000 - 12000) + 12000;
+    setTimeout(scheduleNextNotification, randomInterval);
+  }
+
+  setTimeout(scheduleNextNotification, 5000);  
+
+})();
 </script>
 </body>
 </html>
